@@ -12,11 +12,18 @@
         android:hint="Enter data here"
         android:id="@+id/input"
         />
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/input"
+        android:text="Send" />
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Send"
         android:layout_below="@+id/input"
-        android:id="@+id/btn"
-        />
+        android:layout_marginTop="57dp"
+        android:text="Exit" />
 </RelativeLayout>
