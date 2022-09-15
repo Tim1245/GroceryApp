@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "278930656080",
+    "firebase_url": "https://grocery-price-tracker-fedd5-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "grocery-price-tracker-fedd5",
+    "storage_bucket": "grocery-price-tracker-fedd5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278930656080:android:ac11e8bc387b3aba75ba55",
+        "android_client_info": {
+          "package_name": "com.example.groceryapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "278930656080-8ep60i82t2hhq6vnfmbkdovudamtb04q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.groceryapp",
+            "certificate_hash": "cd911acbc595e48940ad52bc94142cd6966b524b"
+          }
+        },
+        {
+          "client_id": "278930656080-9nemc8uaa149fkelmcf9rfcdalcui5qn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAED-_AuSXVA14mvoHzltmfrnlGhda-dg8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "278930656080-9nemc8uaa149fkelmcf9rfcdalcui5qn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
