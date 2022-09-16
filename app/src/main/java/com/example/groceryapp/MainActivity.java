@@ -27,9 +27,10 @@ public class MainActivity extends AppCompatActivity {
         Button btnRead = findViewById(R.id.btnRead);
         textView = findViewById(R.id.textView);
 
-        DatabaseReference rootDatabaseref = FirebaseDatabase.getInstance("https://grocery-price-tracker-fedd5-default-rtdb.europe-west1.firebasedatabase.app/").getReference("message");
+        DatabaseReference rootDatabaseref = FirebaseDatabase.getInstance("https://grocery-price-tracker-fedd5-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Message");
+        DatabaseReference LidlDatabaseref = FirebaseDatabase.getInstance("https://grocery-price-tracker-fedd5-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Lidl");
 
-        btnRead.setOnClickListener(view -> rootDatabaseref.addValueEventListener(new ValueEventListener() {
+        btnRead.setOnClickListener(view -> LidlDatabaseref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
