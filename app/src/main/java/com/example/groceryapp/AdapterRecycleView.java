@@ -32,10 +32,10 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
     @Override
     public void onBindViewHolder(@NonNull HolderProduct holder, int position) {
         ProductModel productModel = productList.get(position);
-        String Name = productModel.getGroceryName();
-        String Price = productModel.getPrice();
-        String Weight = productModel.getDesc();
-        String Image= productModel.getStoreName();
+        String Name = productModel.getProductName();
+        String Price = productModel.getProductPrice();
+        String Weight = productModel.getProductWeight();
+        String Image= productModel.getProductImage();
 
         holder.productName.setText(Name);
         holder.productPrice.setText(Price);

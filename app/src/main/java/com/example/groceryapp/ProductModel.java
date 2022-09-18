@@ -4,45 +4,44 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
 public class ProductModel {
-    private String GroceryName, StoreName, desc, price;
+    private String productImage, productName, productPrice, productWeight;
 
-    public ProductModel(String groceryName, String storeName, String desc, String price) {
-        GroceryName = groceryName;
-        StoreName = storeName;
-        this.desc = desc;
-        this.price = price;
+    public ProductModel(String productImage, String productName, String productPrice, String productWeight) {
+        this.productImage = productImage;
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.productWeight = productWeight;
     }
 
-    public String getGroceryName() {
-        return GroceryName;
+    public String getProductImage() {
+        return productImage;
     }
 
-    public void setGroceryName(String groceryName) {
-        GroceryName = groceryName;
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
     }
 
-    public String getStoreName() {
-        return StoreName;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setStoreName(String storeName) {
-        StoreName = storeName;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getProductPrice() {
+        return productPrice;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setProductPrice(String productPrice) {
+        this.productPrice = productPrice;
     }
 
-    public String getPrice() {
-        return price;
+    public String getProductWeight() {
+        return productWeight;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }}
-
-
+    public void setProductWeight(String productWeight) {
+        this.productWeight = productWeight;
+    }
+}
