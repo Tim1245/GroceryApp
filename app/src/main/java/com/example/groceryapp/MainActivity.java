@@ -1,6 +1,8 @@
 package com.example.groceryapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         Button btn = findViewById(R.id.btn);
         Button btnRead = findViewById(R.id.btnRead);
         textView = findViewById(R.id.textView);
+        Button show = findViewById(R.id.showProducts);
 
         DatabaseReference rootDatabaseref = FirebaseDatabase.getInstance("https://grocery-price-tracker-fedd5-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Message");
         DatabaseReference LidlDatabaseref = FirebaseDatabase.getInstance("https://grocery-price-tracker-fedd5-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Lidl");
@@ -45,7 +48,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }));
 
-
+        show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenActivity();
+            }
+        });
         btn.setOnClickListener(view -> {
             String data=input.getText().toString();
 
@@ -53,5 +61,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
+    }
+    public void OpenActivity(){
+        Intent intent = new Intent(this, showProducts.class);
+        startActivity(intent);
     }
 }

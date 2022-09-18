@@ -27,19 +27,20 @@
         android:layout_below="@+id/btn"
         android:text="Read" />
 
+    <Button
+        android:id="@+id/showProducts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnRead"
+        android:text="Show Products" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Nothing to show"
         android:id="@+id/textView"
-        android:layout_below="@+id/btnRead"
+        android:layout_below="@+id/showProducts"
        />
 
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnRead"
-        android:layout_marginTop="200dp"
-        android:text="Exit" />
 </RelativeLayout>
