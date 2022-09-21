@@ -1,0 +1,84 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Update Grocery</title>
+</head>
+<body>
+    <div class="main-div">
+        <h1>Update a grocery</h1>
+        <p>Please enter a Grocery</p>
+        <input type="GroceryName" placeholder="Grocery Name..." id="GroceryName">
+        <input type="price" placeholder="Price..." id="price">
+        <input type="desc" placeholder="Description..." id="desc">
+        <div class="select">
+            <select name="selectStore" id="selectStore">
+                <option selected disabled>Choose a store</option>
+                <option value="ICA">ICA</option>
+                <option value="Coop">Coop</option>
+                <option value="Lidl">Lidl</option>
+                <option value="Willys">Willys</option>
+            </select>
+        </div>
+        <br>
+        <div class="select">
+            <select name="selectUnit" id="selectUnit">
+                <option selected disabled>Choose a price unit</option>
+                <option value="kg">Kg</option>
+                <option value="pc">Pc</option>
+            </select>
+        </div>
+        <br>
+        <button type="button" id="createGrocery" name="createGrocery">Update</button>
+        <br>
+        <button onclick="window.location.href='index.html';">Go back</button>
+    </div>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+        import { getDatabase, ref, set, child, get } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyD9LPoBNG_zqnnEckfEeWihfcz5yDDu9sw",
+          authDomain: "grocery-price-tracker-fedd5.firebaseapp.com",
+          databaseURL: "https://grocery-price-tracker-fedd5-default-rtdb.europe-west1.firebasedatabase.app",
+          projectId: "grocery-price-tracker-fedd5",
+          storageBucket: "grocery-price-tracker-fedd5.appspot.com",
+          messagingSenderId: "278930656080",
+          appId: "1:278930656080:web:a2708e3a2a84e14775ba55",
+          measurementId: "G-HE8DPFSTQ8"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getDatabase();
+        const dbRef = ref(getDatabase());
+
+        get(child(dbRef, "Groceries/" + groceryId)).then((snapshot) => {
+            if (snapshot.exists()) {
+                Grocery.value = snapshot.value().GroceryName;
+                price.value = snapshot.value().price;
+                Store.value = snapshot.value().StoreName;
+                Description.value = snapshot.value().desc;
+                PriceUnit.value = snapshot.value().priceUnit;
+            } else {
+                alert("No data available");
+            }
+            })
+            .catch((error) => {
+                alert(error);
+        });
+
+
+      </script>
+</body>
+</html>

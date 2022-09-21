@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Create Grocery</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="main-div">
+            <h1>Create a grocery</h1>
+            <input type="GroceryName" placeholder="Grocery Name..." id="GroceryName">
+            <input type="price" placeholder="Price..." id="price">
+            <input type="desc" placeholder="Description..." id="desc">
+            <div class="select">
+                <select name="selectStore" id="selectStore">
+                    <option selected disabled>Choose a store</option>
+                    <option value="ICA">ICA</option>
+                    <option value="Coop">Coop</option>
+                    <option value="Lidl">Lidl</option>
+                    <option value="Willys">Willys</option>
+                </select>
+            </div>
+            <br>
+            <div class="select">
+                <select name="selectUnit" id="selectUnit">
+                    <option selected disabled>Choose a price unit</option>
+                    <option value="kg">Kg</option>
+                    <option value="pc">Pc</option>
+                </select>
+            </div>
+            <br>
+            <button type="button" id="createGrocery" name="createGrocery" onclick="window.location.href='index2.html';">Create Grocery</button>
+            <br>
+            <button onclick="window.location.href='index.html';">Go back</button>
+        </div>
+
+
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-analytics.js";
+            import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js";
+
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
+          
+            // Your web app's Firebase configuration
+            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+            const firebaseConfig = {
+              apiKey: "AIzaSyD9LPoBNG_zqnnEckfEeWihfcz5yDDu9sw",
+              authDomain: "grocery-price-tracker-fedd5.firebaseapp.com",
+              databaseURL: "https://grocery-price-tracker-fedd5-default-rtdb.europe-west1.firebasedatabase.app",
+              projectId: "grocery-price-tracker-fedd5",
+              storageBucket: "grocery-price-tracker-fedd5.appspot.com",
+              messagingSenderId: "278930656080",
+              appId: "1:278930656080:web:a2708e3a2a84e14775ba55",
+              measurementId: "G-HE8DPFSTQ8"
+            };
+          
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+            const db = getDatabase();
+            const postListRef = ref(db, 'Groceries');
+            const newPostRef = push(postListRef);
+            
+            function writeGroceryData(StoreName, GroceryName, price, desc, priceUnit) {
+
+                set(newPostRef, {
+                    StoreName: StoreName,
+                    GroceryName: GroceryName,
+                    price: price,
+                    desc: desc,
+                    priceUnit: priceUnit
+                });
+
+            }
+
+            createGrocery.addEventListener('click', (e) => {
+                var Store = document.getElementById('selectStore').value;
+                var Grocery = document.getElementById('GroceryName').value;
+                var price = document.getElementById('price').value;
+                var Description = document.getElementById('desc').value;
+                var PriceUnit = document.getElementById('selectUnit').value;
+                if(isNaN(price)) {
+                    alert(price + ' is not a number! Please enter an integer.');
+                }
+                else if(Store === "Choose a store") {
+                    alert('You have not chosen a store!');
+                }
+                else if(!Grocery){
+                    alert('Please enter a grocery name!');
+                }
+                else if(PriceUnit === "Choose a price unit") {
+                    alert("You have not chosen a price unit!");
+                }
+                else {
+                    alert("Grocery created!");
+                    writeGroceryData(Store, Grocery, price, Description, PriceUnit);
+                }
+            });
+
+          </script>
+
+
+    </body>
+</html>
