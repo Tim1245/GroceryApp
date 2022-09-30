@@ -48,8 +48,9 @@ public class ReadDatabase extends AppCompatActivity {
 
         FirebaseRecyclerOptions<MainModel> options=
                 new FirebaseRecyclerOptions.Builder<MainModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Test2"), MainModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Butik").child("WILLYS"), MainModel.class)
                         .build();
+
 
         mainAdapter = new MainAdapter(options);
         recyclerView.setAdapter(mainAdapter);

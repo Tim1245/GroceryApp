@@ -27,15 +27,15 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
 
     @Override
     protected void onBindViewHolder(@NonNull myViewHolder holder, int position, @NonNull MainModel model) {
-        holder.productName.setText(model.getProductName());
-        holder.productPrice.setText(model.getProductPrice());
-        holder.productWeight.setText(model.getProductWeight());
+        holder.title.setText(model.getTitle());
+        holder.price.setText(model.getPrice());
+        holder.size.setText(model.getSize());
 
-        Glide.with(holder.productImage.getContext())
-                .load(model.getProductImage())
+        Glide.with(holder.url_Image.getContext())
+                .load(model.getUrl_Image())
                 .placeholder(com.google.firebase.database.collection.R.drawable.common_google_signin_btn_icon_dark)
                 .error(com.firebase.ui.database.R.drawable.common_google_signin_btn_icon_dark_normal_background)
-                .into(holder.productImage);
+                .into(holder.url_Image);
     }
 
     @NonNull
@@ -46,16 +46,16 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
     }
 
     class myViewHolder extends RecyclerView.ViewHolder{
-        CircleImageView productImage;
-        TextView productName, productPrice, productWeight;
+        CircleImageView url_Image;
+        TextView title, price, size;
 
         public myViewHolder(@NonNull View itemView){
             super(itemView);
 
-            productImage = itemView.findViewById(R.id.img1);
-            productName = itemView.findViewById(R.id.nametext);
-            productPrice = itemView.findViewById(R.id.price);
-            productWeight = itemView.findViewById(R.id.weight);
+            url_Image = itemView.findViewById(R.id.img1);
+            title = itemView.findViewById(R.id.nametext);
+            price = itemView.findViewById(R.id.price);
+            size = itemView.findViewById(R.id.weight);
         }
     }
 }
