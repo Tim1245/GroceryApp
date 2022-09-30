@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void OpenActivity(){
-        Intent intent = new Intent(this, ReadDatabase.class);
+        Intent intent = new Intent(this, Butiker.class);
         startActivity(intent);
     }
 }
