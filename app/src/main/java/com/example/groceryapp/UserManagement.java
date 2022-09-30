@@ -1,12 +1,18 @@
 package com.example.groceryapp;
 
 import com.google.firebase.auth.*;
+
+import android.content.Intent;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import androidx.appcompat.app.AppCompatActivity;
 
 @SuppressWarnings("unused")
 public class UserManagement {
@@ -167,5 +173,11 @@ public class UserManagement {
 
     public static boolean isUserLoggedIn() {
         return getUserInfo() == null;
+    }
+
+    public static void RequireUserLogin(AppCompatActivity previous) {
+        if (isUserLoggedIn() == false) {
+            previous.startActivity(new Intent(previous, LoginActivity.class));
+        }
     }
 }

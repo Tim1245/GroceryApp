@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // If we want to force immediate login
+        // UserManagement.RequireUserLogin(this);
         setContentView(R.layout.homepagenew);
         Button btnRead = findViewById(R.id.btnRead);
 
@@ -25,10 +27,8 @@ public class MainActivity extends AppCompatActivity {
                 OpenActivity();
             }
         });
-
-
-
     }
+
     public void OpenActivity(){
         Intent intent = new Intent(this, ReadDatabase.class);
         startActivity(intent);

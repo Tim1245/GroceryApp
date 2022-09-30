@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/linus/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/linus/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/homepagenew.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/linus/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/loginpage.xml" value="0.24791666666666667" />
+        <entry key="..\:/Users/linus/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/main_item.xml" value="0.358695652173913" />
         <entry key="..\:/Users/madia/AndroidStudioProjects/GroceryApp/app/src/main/res/drawable/rectangle2.xml" value="0.1" />
         <entry key="..\:/Users/madia/AndroidStudioProjects/GroceryApp/app/src/main/res/drawable/shape1.xml" value="0.2545" />
         <entry key="..\:/Users/madia/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/activity_main.xml" value="0.1368421052631579" />
