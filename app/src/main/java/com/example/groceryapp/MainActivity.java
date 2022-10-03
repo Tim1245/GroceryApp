@@ -20,11 +20,20 @@ public class MainActivity extends AppCompatActivity {
         // UserManagement.RequireUserLogin(this);
         setContentView(R.layout.homepagenew);
         Button btnRead = findViewById(R.id.btnRead);
+        Button btnMap = findViewById(R.id.btnMap);
 
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 OpenActivity();
+            }
+        });
+
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(intent2);;
             }
         });
     }

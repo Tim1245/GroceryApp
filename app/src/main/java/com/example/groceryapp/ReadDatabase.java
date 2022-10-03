@@ -50,7 +50,11 @@ public class ReadDatabase extends AppCompatActivity {
                 new FirebaseRecyclerOptions.Builder<MainModel>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("Butik").child(butik), MainModel.class)
                         .build();
-
+        //Categories
+        /*FirebaseRecyclerOptions<MainModel> options=
+                new FirebaseRecyclerOptions.Builder<MainModel>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Butik").child(butik).orderByChild("category").startAt("Frukt & Grönt").endAt("Frukt & Grönt"+"\uf8ff"), MainModel.class)
+                        .build();*/
 
         mainAdapter = new MainAdapter(options);
         recyclerView.setAdapter(mainAdapter);
