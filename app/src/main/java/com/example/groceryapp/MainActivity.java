@@ -25,21 +25,20 @@ public class MainActivity extends AppCompatActivity {
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpenActivity();
+                OpenActivity(Butiker.class);
             }
         });
 
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2 = new Intent(MainActivity.this, MapsActivity.class);
-                startActivity(intent2);;
+                OpenActivity(MapsActivity.class);
             }
         });
     }
 
-    public void OpenActivity(){
-        Intent intent = new Intent(this, Butiker.class);
+    public void OpenActivity(Class activity){
+        Intent intent = new Intent(this, activity);
         startActivity(intent);
     }
 }
