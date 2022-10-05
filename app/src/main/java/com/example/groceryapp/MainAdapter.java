@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -36,6 +35,7 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
                 .placeholder(com.google.firebase.database.collection.R.drawable.common_google_signin_btn_icon_dark)
                 .error(com.firebase.ui.database.R.drawable.common_google_signin_btn_icon_dark_normal_background)
                 .into(holder.url_Image);
+
     }
 
     @NonNull

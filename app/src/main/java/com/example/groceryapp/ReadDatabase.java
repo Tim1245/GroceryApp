@@ -44,13 +44,17 @@ public class ReadDatabase extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        String butik = getIntent().getStringExtra("Butik");
 
         FirebaseRecyclerOptions<MainModel> options=
                 new FirebaseRecyclerOptions.Builder<MainModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Butik").child("WILLYS"), MainModel.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Butik").child(butik), MainModel.class)
                         .build();
-
+        //Categories
+        /*FirebaseRecyclerOptions<MainModel> options=
+                new FirebaseRecyclerOptions.Builder<MainModel>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Butik").child(butik).orderByChild("category").startAt("Frukt & Grönt").endAt("Frukt & Grönt"+"\uf8ff"), MainModel.class)
+                        .build();*/
 
         mainAdapter = new MainAdapter(options);
         recyclerView.setAdapter(mainAdapter);

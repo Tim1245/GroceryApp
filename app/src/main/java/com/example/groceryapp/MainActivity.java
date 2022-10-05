@@ -20,17 +20,25 @@ public class MainActivity extends AppCompatActivity {
         // UserManagement.RequireUserLogin(this);
         setContentView(R.layout.homepagenew);
         Button btnRead = findViewById(R.id.btnRead);
+        Button btnMap = findViewById(R.id.btnMap);
 
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpenActivity();
+                OpenActivity(Butiker.class);
+            }
+        });
+
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenActivity(MapsActivity.class);
             }
         });
     }
 
-    public void OpenActivity(){
-        Intent intent = new Intent(this, ReadDatabase.class);
+    public void OpenActivity(Class activity){
+        Intent intent = new Intent(this, activity);
         startActivity(intent);
     }
 }

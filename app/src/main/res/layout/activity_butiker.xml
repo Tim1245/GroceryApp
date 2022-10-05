@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Butiker">
+
+    <Button
+        android:id="@+id/btnLIDL"
+        android:layout_width="180dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="265dp"
+        android:layout_marginLeft="15dp"
+        android:text="LIDL" />
+
+    <Button
+        android:id="@+id/btnICA"
+        android:layout_width="180dp"
+        android:layout_height="160dp"
+        android:layout_marginLeft="215dp"
+        android:layout_marginTop="265dp"
+        android:text="ICA" />
+
+    <Button
+        android:id="@+id/btnWILLYS"
+        android:layout_width="180dp"
+        android:layout_height="160dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="100dp"
+        android:text="WILLYS" />
+
+    <Button
+        android:id="@+id/btnCOOP"
+        android:layout_width="180dp"
+        android:layout_height="160dp"
+        android:layout_marginLeft="215dp"
+        android:layout_marginTop="100dp"
+        android:text="COOP" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="283dp"
+        android:layout_height="67dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Butiker"
+        android:textSize="48sp" />
+</RelativeLayout>
