@@ -22,7 +22,7 @@
         android:id="@+id/password_text_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="56dp"
         android:ems="10"
         android:inputType="textPassword"
         android:minHeight="48dp"
@@ -30,12 +30,13 @@
         app:layout_constraintTop_toBottomOf="@+id/email_text_field" />
 
     <Button
-        android:id="@+id/not_registered_btn"
+        android:id="@+id/register_user_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Not registered?"
+        android:layout_marginTop="16dp"
+        android:text="register"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_btn" />
 
@@ -48,4 +49,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_text_field" />
+
+    <TextView
+        android:id="@+id/email_text_no_interact"
+        android:layout_width="43dp"
+        android:layout_height="19dp"
+        android:layout_marginBottom="12dp"
+        android:text="Email:"
+        app:layout_constraintBottom_toTopOf="@+id/email_text_field"
+        app:layout_constraintStart_toStartOf="@+id/email_text_field" />
+
+    <TextView
+        android:id="@+id/password_text_non_interact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="Password:"
+        app:layout_constraintBottom_toTopOf="@+id/password_text_field"
+        app:layout_constraintStart_toStartOf="@+id/password_text_field" />
 </androidx.constraintlayout.widget.ConstraintLayout>

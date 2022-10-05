@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
         TextView email_view = findViewById(R.id.email_text_field);
         TextView password_view = findViewById(R.id.password_text_field);
         Button login_btn = findViewById(R.id.login_btn);
-        Button register_btn = findViewById(R.id.not_registered_btn);
+        Button register_btn = findViewById(R.id.register_user_btn);
 
         register_btn.setOnClickListener((View view) -> {
             Log.i("Login UI test", "User attempting to register");
