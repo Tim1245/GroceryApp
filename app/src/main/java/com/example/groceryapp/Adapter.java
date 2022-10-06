@@ -1,5 +1,7 @@
 package com.example.groceryapp;
 
+import android.content.Context;
+import android.view.ContentInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,25 +10,33 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
+
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.myViewHolder> {
-    /**
-     * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
-     * {@link FirebaseRecyclerOptions} for configuration options.
-     *
-     * @param options
-     */
-    public MainAdapter(@NonNull FirebaseRecyclerOptions<MainModel> options) {
-        super(options);
+public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder>{
+
+    private Context context;
+    public ArrayList<MainModel> productList;
+
+    public Adapter(Context context, ArrayList<MainModel> productList) {
+        this.context = context;
+        this.productList = productList;
+    }
+
+    @NonNull
+    @Override
+    public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.main_item,parent,false);
+        return new myViewHolder(view);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull myViewHolder holder, int position, @NonNull MainModel model) {
+    public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
+        MainModel model = productList.get(position);
         holder.title.setText(model.getTitle());
         holder.price.setText(model.getPrice());
         holder.size.setText(model.getSize());
@@ -39,11 +49,9 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
 
     }
 
-    @NonNull
     @Override
-    public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_item,parent,false);
-        return new myViewHolder(view);
+    public int getItemCount() {
+        return productList.size();
     }
 
     class myViewHolder extends RecyclerView.ViewHolder{

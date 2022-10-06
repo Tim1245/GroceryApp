@@ -50,6 +50,14 @@
         android:layout_marginTop="100dp"
         android:text="COOP" />
 
+    <Button
+        android:id="@+id/btnAll"
+        android:layout_width="180dp"
+        android:layout_height="160dp"
+        android:layout_below="@+id/btnLIDL"
+        android:layout_marginLeft="120dp"
+        android:text="ALL" />
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="283dp"

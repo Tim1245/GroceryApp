@@ -4,7 +4,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
 public class MainModel {
-    String url_Image, title, price, size, category, highlight, info, unit;
+    private String url_Image, title, price, size, category, highlight, info, unit;
 
     MainModel(){
 
@@ -18,38 +18,6 @@ public class MainModel {
         this.category = category;
         this.highlight = highlight;
         this.info = info;
-        this.unit = unit;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getHighlight() {
-        return highlight;
-    }
-
-    public void setHighlight(String highlight) {
-        this.highlight = highlight;
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
         this.unit = unit;
     }
 
@@ -85,6 +53,35 @@ public class MainModel {
         this.size = size;
     }
 
+    public String getCategory() {
+        return category;
+    }
 
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
+    public String getHighlight() {
+        return highlight;
+    }
+
+    public void setHighlight(String highlight) {
+        this.highlight = highlight;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 }
