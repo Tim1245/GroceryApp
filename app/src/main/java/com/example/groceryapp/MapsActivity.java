@@ -62,7 +62,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(icaViken).title("Ica Nära Viken"));
         mMap.addMarker(new MarkerOptions().position(icaKarnan).title("Ica Nära Kärnan"));
         mMap.addMarker(new MarkerOptions().position(icaSuperMarketFanfar).title("Ica Supermarket Fanfaren"));
-
         mMap.addMarker(new MarkerOptions().position(icaBergvik).title("Ica-Maxi Bergviken"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(karlstad));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(karlstad,11));
