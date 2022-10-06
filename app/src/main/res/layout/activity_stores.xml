@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="yes"
+        app:srcCompat="@drawable/backgroundrect" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="22dp"
+        android:text="Stores"
+        android:textColor="@color/white"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        app:layout_anchorGravity="center" />
+
+    <ImageView
+        android:id="@+id/willysbtn"
+        android:layout_width="166dp"
+        android:layout_height="166dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="94dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="yes"
+        app:srcCompat="@drawable/bigrect" />
+
+    <Switch
+        android:id="@+id/switch_willys"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="265dp"
+        android:background="#FFFFFF"
+        android:buttonTint="#000000"
+        android:text="Favourite"
+        android:textColor="#000000"
+        android:thumbTint="#F3000000"
+        android:trackTint="#E6000000" />
+
+    <ImageView
+        android:id="@+id/coopbtn"
+        android:layout_width="166dp"
+        android:layout_height="166dp"
+        android:layout_marginLeft="221dp"
+        android:layout_marginTop="94dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="yes"
+        app:srcCompat="@drawable/bigrect" />
+
+    <Switch
+        android:id="@+id/switch_coop"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="230dp"
+        android:layout_marginTop="265dp"
+        android:background="#FFFFFF"
+        android:buttonTint="#000000"
+        android:text="Favourite"
+        android:textColor="#000000"
+        android:thumbTint="#F3000000"
+        android:trackTint="#E6000000" />
+
+    <ImageView
+        android:id="@+id/lidlbtn"
+        android:layout_width="166dp"
+        android:layout_height="166dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="300dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="yes"
+        app:srcCompat="@drawable/bigrect" />
+
+    <Switch
+        android:id="@+id/switch_lidl"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="470dp"
+        android:background="#FFFFFF"
+        android:buttonTint="#000000"
+        android:text="Favourite"
+        android:textColor="#000000"
+        android:thumbTint="#F3000000"
+        android:trackTint="#E6000000" />
+
+    <ImageView
+        android:id="@+id/maxibtn"
+        android:layout_width="166dp"
+        android:layout_height="166dp"
+        android:layout_marginLeft="221dp"
+        android:layout_marginTop="300dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="yes"
+        app:srcCompat="@drawable/bigrect" />
+
+    <Switch
+        android:id="@+id/switch_maxi"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="230dp"
+        android:layout_marginTop="470dp"
+        android:background="#FFFFFF"
+        android:buttonTint="#000000"
+        android:text="Favourite"
+        android:textColor="#000000"
+        android:thumbTint="#F3000000"
+        android:trackTint="#E6000000" />
+
+
+    <ImageView
+        android:id="@+id/allbtn"
+        android:layout_width="179dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="506dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="yes"
+        app:srcCompat="@drawable/smallrect" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="All"
+        android:textSize="22dp"
+        android:textColor="@color/black"
+        app:layout_anchor="@+id/allbtn"
+        app:layout_anchorGravity="center"
+        />
+
+    <ImageView
+        android:id="@+id/willyslogo"
+        android:layout_width="156dp"
+        android:layout_height="166dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="94dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="yes"
+        app:srcCompat="@drawable/willys" />
+
+    <ImageView
+        android:id="@+id/cooplogo"
+        android:layout_width="156dp"
+        android:layout_height="166dp"
+        android:layout_marginLeft="226dp"
+        android:layout_marginTop="94dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="yes"
+        app:srcCompat="@drawable/coop" />
+
+    <ImageView
+        android:id="@+id/lidllogo"
+        android:layout_width="161dp"
+        android:layout_height="161dp"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="300dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="yes"
+        app:srcCompat="@drawable/lidl" />
+
+    <ImageView
+        android:id="@+id/maxilogo"
+        android:layout_width="156dp"
+        android:layout_height="166dp"
+        android:layout_marginLeft="226dp"
+        android:layout_marginTop="300dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="yes"
+        app:srcCompat="@drawable/maxi" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
