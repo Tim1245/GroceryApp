@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Switch;
 
 import com.google.android.gms.tasks.Task;
@@ -38,16 +39,27 @@ public class ButikerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_butiker);
+        //setContentView(R.layout.activity_butiker);
 
-        Button btnWILLYS = findViewById(R.id.btnWILLYS);
+        setContentView(R.layout.activity_stores);
+
+        ImageView btnWILLYS = findViewById(R.id.willysbtn);
+        switchWILLYS = findViewById(R.id.switch_willys);
+        ImageView btnCOOP = findViewById(R.id.coopbtn);
+        switchCOOP = findViewById(R.id.switch_coop);
+        ImageView btnICA = findViewById(R.id.maxibtn);
+        switchICA = findViewById(R.id.switch_maxi);
+        ImageView btnLIDL = findViewById(R.id.lidlbtn);
+        switchLIDL = findViewById(R.id.switch_lidl);
+
+        /* Button btnWILLYS = findViewById(R.id.btnWILLYS);
         switchWILLYS = findViewById(R.id.Switch_Favourite_Willys);
         Button btnCOOP = findViewById(R.id.btnCOOP);
         switchCOOP = findViewById(R.id.Switch_Favourite_Coop);
         Button btnICA = findViewById(R.id.btnICA);
         switchICA = findViewById(R.id.Switch_Favourite_ICA);
         Button btnLIDL = findViewById(R.id.btnLIDL);
-        switchLIDL = findViewById(R.id.Switch_Favourite_Lidl);
+        switchLIDL = findViewById(R.id.Switch_Favourite_Lidl);*/
 
         if (UserManagement.isUserLoggedIn()) {
             SetFavouriteSwitches();

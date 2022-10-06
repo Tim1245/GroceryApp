@@ -18,11 +18,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // If we want to force immediate login
-         UserManagement.RequireUserLogin(this);
+        //UserManagement.RequireUserLogin(this);
         setContentView(R.layout.newhomepage);
         ImageView btnRead = findViewById(R.id.productbtn);
         ImageView btnMap = findViewById(R.id.mapbtn);
         ImageView btnLogOut = findViewById(R.id.logoutbtn);
+        ImageView btnSettings = findViewById(R.id.settingbtn);
 
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +41,13 @@ public class MainActivity extends AppCompatActivity {
 
         btnLogOut.setOnClickListener((View view) -> {
             UserManagement.signOut();
+        });
+
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenActivity(Settings.class);
+            }
         });
     }
 

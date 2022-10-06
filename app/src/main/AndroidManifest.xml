@@ -41,6 +41,13 @@
             android:name=".ReadDatabase"
             android:exported="false" />
         <activity
+            android:name=".Settings"
+            android:exported="false" />
+        <activity
+            android:name=".FAQactivity"
+            android:exported="false" />
+
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

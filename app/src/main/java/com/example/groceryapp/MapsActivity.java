@@ -43,6 +43,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         LatLng karlstad = new LatLng(59.404390283954065, 13.512529182246308);
+        LatLng coopBergvik = new LatLng(59.377955, 13.425271);
         LatLng coopValsviken = new LatLng(59.39631609438561, 13.575848584939761);
         LatLng icaValsviken = new LatLng(59.39636019797852, 13.580784956104168);
         LatLng willysCity = new LatLng(59.37873877071142, 13.509179240196127);
@@ -53,6 +54,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng icaKarnan = new LatLng(59.387091362830496, 13.46403259886529);
         LatLng icaSuperMarketFanfar = new LatLng(59.3851325779657, 13.48540154747029);
         LatLng icaBergvik = new LatLng(59.37816709297543, 13.429414902125185);
+        mMap.addMarker(new MarkerOptions().position(coopBergvik).title("Stora Coop Bergvik"));
         mMap.addMarker(new MarkerOptions().position(coopValsviken).title("Stora Coop Välsviken"));
         mMap.addMarker(new MarkerOptions().position(icaValsviken).title("Ica-Maxi Välsviken"));
         mMap.addMarker(new MarkerOptions().position(willysCity).title("Willys City"));
