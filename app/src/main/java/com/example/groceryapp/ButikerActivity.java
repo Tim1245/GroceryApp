@@ -7,8 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class Butiker extends AppCompatActivity {
+public class ButikerActivity extends AppCompatActivity {
     String butik;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,10 +53,8 @@ public class Butiker extends AppCompatActivity {
                 OpenActivity();
             }
         });
-
-
-
     }
+
     public void OpenActivity(){
         Intent intent = new Intent(this, ReadDatabase.class);
         intent.putExtra("Butik", butik);

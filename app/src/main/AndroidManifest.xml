@@ -31,7 +31,7 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".Butiker"
+            android:name=".ButikerActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

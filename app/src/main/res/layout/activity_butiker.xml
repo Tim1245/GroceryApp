@@ -4,15 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Butiker">
-
-    <Button
-        android:id="@+id/btnLIDL"
-        android:layout_width="180dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="265dp"
-        android:layout_marginLeft="15dp"
-        android:text="LIDL" />
+    tools:context=".ButikerActivity">
 
     <Button
         android:id="@+id/btnICA"
@@ -23,17 +15,37 @@
         android:text="ICA" />
 
     <Button
-        android:id="@+id/btnWILLYS"
+        android:id="@+id/btnLIDL"
         android:layout_width="180dp"
         android:layout_height="160dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="265dp"
+        android:text="LIDL" />
+
+    <Button
+        android:id="@+id/btnWILLYS"
+        android:layout_width="177dp"
+        android:layout_height="96dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="100dp"
         android:text="WILLYS" />
 
+    <Switch
+        android:id="@+id/Switch_Favourite_Willys"
+        android:layout_width="169dp"
+        android:layout_height="48dp"
+        android:layout_alignStart="@+id/btnWILLYS"
+        android:layout_alignEnd="@+id/btnWILLYS"
+        android:layout_alignBottom="@+id/btnWILLYS"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="-56dp"
+        android:text="Favourite" />
+
     <Button
         android:id="@+id/btnCOOP"
-        android:layout_width="180dp"
-        android:layout_height="160dp"
+        android:layout_width="179dp"
+        android:layout_height="92dp"
         android:layout_marginLeft="215dp"
         android:layout_marginTop="100dp"
         android:text="COOP" />
@@ -46,4 +58,35 @@
         android:layout_marginTop="20dp"
         android:text="Butiker"
         android:textSize="48sp" />
+
+    <Switch
+        android:id="@+id/Switch_Favourite_Coop"
+        android:layout_width="170dp"
+        android:layout_height="48dp"
+        android:layout_alignEnd="@+id/btnCOOP"
+        android:layout_alignBottom="@+id/btnCOOP"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="-62dp"
+        android:text="Favourite" />
+
+    <Switch
+        android:id="@+id/Switch_Favourite_Lidl"
+        android:layout_width="176dp"
+        android:layout_height="48dp"
+        android:layout_alignEnd="@+id/btnLIDL"
+        android:layout_alignBottom="@+id/btnLIDL"
+        android:layout_marginEnd="-4dp"
+        android:layout_marginBottom="-65dp"
+        android:text="Favourite" />
+
+    <Switch
+        android:id="@+id/Switch_Favourite_ICA"
+        android:layout_width="148dp"
+        android:layout_height="55dp"
+        android:layout_alignEnd="@+id/btnICA"
+        android:layout_alignBottom="@+id/btnICA"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="-78dp"
+        android:text="Favourite" />
+
 </RelativeLayout>
