@@ -173,13 +173,14 @@ public class UserManagement {
     }
 
     public static boolean isUserLoggedIn() {
-        return getUserInfo() == null;
+        return getUserInfo() != null;
     }
 
     public static void RequireUserLogin(AppCompatActivity previous) {
         if (isUserLoggedIn() == false) {
             previous.startActivity(new Intent(previous, LoginActivity.class));
         }
+        Log.i(USER_MANAGEMENT_LOG_TAG, "User is now logged in with UID: " + getAuth().getCurrentUser().getUid());
     }
 
     public static String GetUserUID() throws UserNotAuthenticatedException {

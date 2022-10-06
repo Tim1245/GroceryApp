@@ -14,7 +14,10 @@ import com.google.firebase.auth.AuthResult;
 public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i("Login UI test", "User opened the login page");
         super.onCreate(savedInstanceState);
+
+
 
         setContentView(R.layout.loginpage);
 
