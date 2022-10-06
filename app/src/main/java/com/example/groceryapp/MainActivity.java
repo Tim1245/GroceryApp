@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,9 +19,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // If we want to force immediate login
         // UserManagement.RequireUserLogin(this);
-        setContentView(R.layout.homepagenew);
-        Button btnRead = findViewById(R.id.btnRead);
-        Button btnMap = findViewById(R.id.btnMap);
+        setContentView(R.layout.newhomepage);
+        ImageView btnRead = findViewById(R.id.productbtn);
+        ImageView btnMap = findViewById(R.id.mapbtn);
 
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
