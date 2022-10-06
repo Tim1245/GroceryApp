@@ -3,6 +3,7 @@ package com.example.groceryapp;
 import com.google.firebase.auth.*;
 
 import android.content.Intent;
+import android.security.keystore.UserNotAuthenticatedException;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -179,5 +180,12 @@ public class UserManagement {
         if (isUserLoggedIn() == false) {
             previous.startActivity(new Intent(previous, LoginActivity.class));
         }
+    }
+
+    public static String GetUserUID() throws UserNotAuthenticatedException {
+        if (isUserLoggedIn()) {
+            return getAuth().getCurrentUser().getUid();
+        }
+        throw new UserNotAuthenticatedException();
     }
 }
