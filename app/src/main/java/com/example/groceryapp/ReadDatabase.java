@@ -1,9 +1,14 @@
 package com.example.groceryapp;
 
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -14,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 public class ReadDatabase extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -32,11 +39,40 @@ public class ReadDatabase extends AppCompatActivity {
     DatabaseReference ref;
     private ArrayList<MainModel> productList;
     private Adapter adapter;
+    private SearchView searchView;
+    private ImageButton filterCategory;
+
+    public static final String[] Categories={
+            "ALL",
+            "FRUKT",
+            "Barn",
+            "BRÖD",
+            "KÖTT",
+            "Mejerivaror"
+    };
     // Get the database instance and store into object
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Search bar
+        searchView = findViewById(R.id.searchView);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchList(newText);
+                return false;
+            }
+        });
+
+        filterCategory = findViewById(R.id.filterCategory);
         recyclerView = findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         String butik = getIntent().getStringExtra("Butik");
@@ -56,6 +92,26 @@ public class ReadDatabase extends AppCompatActivity {
             loadOne(ref, butik);
         }
 
+        //Categories
+        filterCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ReadDatabase.this);
+                builder.setTitle("Choose Category: ").setItems(Categories, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                String selected = Categories[i];
+                                if(selected.equals("ALL"))
+                                    loadOne(ref,butik);
+                                else
+                                    loadFiltered(ref, butik, selected);
+                                //newList= filterList(selected, productList);
+
+                            }
+                        })
+                        .show();
+            }
+        });
 
 
         //Categories
@@ -81,26 +137,19 @@ public class ReadDatabase extends AppCompatActivity {
         super.onStop();
         mainAdapter.stopListening();
     }*/
+
+
     public void loadOne(DatabaseReference reference, String butik){
         reference.child(butik).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 productList.clear();
                     for (DataSnapshot ds : snapshot.getChildren()) {
-                        String category = ds.child("category").getValue(String.class);
-                        String price = ds.child("price").getValue(String.class);
-
-                            MainModel model = ds.getValue(MainModel.class);
+                           MainModel model = ds.getValue(MainModel.class);
                             productList.add(model);}
-
-                adapter.notifyDataSetChanged();
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    Collections.sort(productList, Comparator.comparing(MainModel::getTitle));
-                }
-
+                    Collections.sort(productList, new CustomComparator());
+                    adapter.notifyDataSetChanged();
             }
-
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -115,18 +164,14 @@ public class ReadDatabase extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 productList.clear();
                 for (DataSnapshot ds1: snapshot.getChildren()) {
-
                     for (DataSnapshot ds : ds1.getChildren()) {
-                        String category = ds.child("category").getValue(String.class);
-                        String price = ds.child("price").getValue(String.class);
-
-
                             MainModel model = ds.getValue(MainModel.class);
                             productList.add(model);}
 
                 }
-
+                Collections.sort(productList, new CustomComparator());
                 adapter.notifyDataSetChanged();
+
             }
 
             @Override
@@ -143,22 +188,48 @@ public class ReadDatabase extends AppCompatActivity {
                 productList.clear();
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     String category = ds.child("category").getValue(String.class);
-                    String price = ds.child("price").getValue(String.class);
                     if (category.equals(filter)) {
                         MainModel model = ds.getValue(MainModel.class);
                         productList.add(model);
                     }
                 }
+                Collections.sort(productList, new CustomComparator());
                 adapter.notifyDataSetChanged();
 
             }
-
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+
+
+    }
+
+    public void searchList(String filter){
+        ArrayList<MainModel> filteredList = new ArrayList<>();
+
+        for(MainModel item: productList){
+            if(filter.equals("ALL")){
+                filteredList.add(item);
+
+            }
+            else if(item.getTitle().toLowerCase().contains(filter.toLowerCase()) || item.getCategory().toLowerCase().contains(filter.toLowerCase())){
+                filteredList.add(item);
+            }
+        }
+        if(filteredList.isEmpty()){
+            Toast.makeText(this, "No data found", Toast.LENGTH_SHORT).show();
+        }else{
+            adapter.setFilteredList(filteredList,filter);
+        }
+
+    }
+    public class CustomComparator implements Comparator<MainModel> {
+        @Override
+        public int compare(MainModel o1, MainModel o2) {
+            return Double.compare(Double.valueOf(o1.getPrice().replaceAll("[^\\.0123456789]","")),Double.valueOf(o2.getPrice().replaceAll("[^\\.0123456789]","")));
+        }
     }
 }

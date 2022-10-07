@@ -21,10 +21,25 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder>{
 
     private Context context;
     public ArrayList<MainModel> productList;
+    public ArrayList<MainModel> List;
+
 
     public Adapter(Context context, ArrayList<MainModel> productList) {
         this.context = context;
         this.productList = productList;
+        this.List = productList;
+    }
+    public void setFilteredList(ArrayList<MainModel> filteredList, String filter){
+        if(filter != null && filter.length() > 0){
+
+            this.productList = filteredList;
+            notifyDataSetChanged();
+        }
+        else{
+            this.productList = List;
+            notifyDataSetChanged();}
+
+
     }
 
     @NonNull

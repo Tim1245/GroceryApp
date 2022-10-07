@@ -37,7 +37,6 @@ public class ButikerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_stores);
-
         ImageView btnWILLYS = findViewById(R.id.willysbtn);
         switchWILLYS = findViewById(R.id.switch_willys);
         ImageView btnCOOP = findViewById(R.id.coopbtn);
