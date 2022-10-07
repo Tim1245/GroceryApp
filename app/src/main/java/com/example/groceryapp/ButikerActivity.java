@@ -1,21 +1,22 @@
 package com.example.groceryapp;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +27,8 @@ public class ButikerActivity extends AppCompatActivity {
     static final String LIDL = "LIDL";
     static final String WILLYS = "WILLYS";
 
+    // Request code was randomly generated
+    static final int LOGIN_REQUEST_CODE = 809730;
     static final String TEST_TAG = "FAVOURITES_TEST";
 
     String butik;
@@ -39,7 +42,6 @@ public class ButikerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_butiker);
 
         setContentView(R.layout.activity_stores);
 
@@ -52,58 +54,76 @@ public class ButikerActivity extends AppCompatActivity {
         ImageView btnLIDL = findViewById(R.id.lidlbtn);
         switchLIDL = findViewById(R.id.switch_lidl);
 
-        /* Button btnWILLYS = findViewById(R.id.btnWILLYS);
-        switchWILLYS = findViewById(R.id.Switch_Favourite_Willys);
-        Button btnCOOP = findViewById(R.id.btnCOOP);
-        switchCOOP = findViewById(R.id.Switch_Favourite_Coop);
-        Button btnICA = findViewById(R.id.btnICA);
-        switchICA = findViewById(R.id.Switch_Favourite_ICA);
-        Button btnLIDL = findViewById(R.id.btnLIDL);
-        switchLIDL = findViewById(R.id.Switch_Favourite_Lidl);*/
-
         if (UserManagement.isUserLoggedIn()) {
             SetFavouriteSwitches();
         }
 
         switchWILLYS.setOnClickListener((View view) -> {
-           OnFavouriteSwitched();
+           if (UserManagement.isUserLoggedIn()) {
+               OnFavouriteSwitched();
+           }
+           else {
+               startActivity(new Intent(this, LoginActivity.class));
+           }
         });
 
         switchCOOP.setOnClickListener((View view) -> {
-            OnFavouriteSwitched();
+            if (UserManagement.isUserLoggedIn()) {
+                OnFavouriteSwitched();
+            }
+            else {
+                startActivity(new Intent(this, LoginActivity.class));
+            }
         });
 
         switchICA.setOnClickListener((View view) -> {
-            OnFavouriteSwitched();
+            if (UserManagement.isUserLoggedIn()) {
+                OnFavouriteSwitched();
+            }
+            else {
+                startActivity(new Intent(this, LoginActivity.class));
+            }
         });
 
         switchLIDL.setOnClickListener((View view) -> {
-            OnFavouriteSwitched();
+            if (UserManagement.isUserLoggedIn()) {
+                OnFavouriteSwitched();
+            }
+            else {
+                startActivity(new Intent(this, LoginActivity.class));
+            }
         });
 
         btnCOOP.setOnClickListener((View view) -> {
                 butik = STORA_COOP_VALSVIKEN; //"STORA_COOP_VALSVIKEN";
-                OpenActivity();
+                OpenStoreActivity();
         });
 
         btnICA.setOnClickListener((View view) -> {
                 butik = ICA_MAXI; //"ICA-MAXI";
-                OpenActivity();
+                OpenStoreActivity();
         });
 
         btnLIDL.setOnClickListener((View view) -> {
                 butik = LIDL; //"LIDL";
-                OpenActivity();
+                OpenStoreActivity();
         });
 
         btnWILLYS.setOnClickListener((View view) -> {
                 butik = WILLYS; //"WILLYS";
-                OpenActivity();
+                OpenStoreActivity();
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode != LOGIN_REQUEST_CODE) {
+            return;
+        }
+    }
+
     void OnFavouriteSwitched() {
-        UserManagement.RequireUserLogin(this);
         Map<String, Object> user = new HashMap<String, Object>();
         user.put(WILLYS, switchWILLYS.isChecked());
         user.put(STORA_COOP_VALSVIKEN, switchCOOP.isChecked());
@@ -156,7 +176,7 @@ public class ButikerActivity extends AppCompatActivity {
         }
     }
 
-    public void OpenActivity(){
+    public void OpenStoreActivity(){
         Intent intent = new Intent(this, ReadDatabase.class);
         intent.putExtra("Butik", butik);
         startActivity(intent);

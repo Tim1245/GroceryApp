@@ -1,6 +1,7 @@
 package com.example.groceryapp;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +18,9 @@ public class LoginActivity extends AppCompatActivity {
         Log.i("Login UI test", "User opened the login page");
         super.onCreate(savedInstanceState);
 
-
+        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder(StrictMode.getVmPolicy())
+                .detectLeakedClosableObjects()
+                .build());
 
         setContentView(R.layout.loginpage);
 
