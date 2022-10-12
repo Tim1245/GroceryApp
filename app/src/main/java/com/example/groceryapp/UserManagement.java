@@ -1,31 +1,25 @@
 package com.example.groceryapp;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.*;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.security.keystore.UserNotAuthenticatedException;
 import android.util.Log;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.concurrent.Executor;
-import java.util.function.Consumer;
+import java.util.HashMap;
+import java.util.Map;
 
 @SuppressWarnings("unused")
 public class UserManagement {
     static final String USER_MANAGEMENT_LOG_TAG = "User Management Logs";
+
+    static Map<Object, Runnable> OnLoginCallbacks = new HashMap<>();
+    static Map<Object, Runnable> OnLogoutCallbacks = new HashMap<>();
 
     static FirebaseAuth auth = null;
     static private FirebaseAuth getAuth() {
@@ -33,6 +27,25 @@ public class UserManagement {
             auth = FirebaseAuth.getInstance();
         }
         return auth;
+    }
+
+    public static void RegisterOnLoginCallback(Object caller, Runnable callback) {
+        OnLoginCallbacks.put(caller, callback);
+        if (isUserLoggedIn()) {
+            callback.run();
+        }
+    }
+
+    public static void RemoveOnLoginCallback(Object caller) {
+        OnLoginCallbacks.remove(caller);
+    }
+
+    public static void RegisterOnLogoutCallback(Object caller, Runnable callback) {
+        OnLogoutCallbacks.put(caller, callback);
+    }
+
+    public static void RemoveOnLogoutCallback(Object caller) {
+        OnLogoutCallbacks.remove(caller);
     }
 
     public static void createUserDefault(String email, String password, OnCompleteListener<AuthResult> onComplete) {
