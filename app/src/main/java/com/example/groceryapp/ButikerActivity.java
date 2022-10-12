@@ -9,20 +9,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Switch;
 
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.Map;
 
 public class ButikerActivity extends AppCompatActivity {
     static final String STORA_COOP_VALSVIKEN = "STORA_COOP_VALSVIKEN";
     static final String ICA_MAXI = "ICA-MAXI";
     static final String LIDL = "LIDL";
     static final String WILLYS = "WILLYS";
-
-    // Request code was randomly generated
-    static final String TEST_TAG = "FAVOURITES_TEST";
 
     String butik;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -50,41 +43,15 @@ public class ButikerActivity extends AppCompatActivity {
             SetFavouriteSwitches();
         }
 
-        switchWILLYS.setOnClickListener((View view) -> {
-               OnFavouriteSwitched();
-        });
+        switchWILLYS.setOnClickListener((View view) -> OnFavouriteSwitched());
+        switchCOOP.setOnClickListener((View view) -> OnFavouriteSwitched());
+        switchICA.setOnClickListener((View view) -> OnFavouriteSwitched());
+        switchLIDL.setOnClickListener((View view) -> OnFavouriteSwitched());
 
-        switchCOOP.setOnClickListener((View view) -> {
-                OnFavouriteSwitched();
-        });
-
-        switchICA.setOnClickListener((View view) -> {
-                OnFavouriteSwitched();
-        });
-
-        switchLIDL.setOnClickListener((View view) -> {
-                OnFavouriteSwitched();
-        });
-
-        btnCOOP.setOnClickListener((View view) -> {
-                butik = STORA_COOP_VALSVIKEN; //"STORA_COOP_VALSVIKEN";
-                OpenStoreActivity();
-        });
-
-        btnICA.setOnClickListener((View view) -> {
-                butik = ICA_MAXI; //"ICA-MAXI";
-                OpenStoreActivity();
-        });
-
-        btnLIDL.setOnClickListener((View view) -> {
-                butik = LIDL; //"LIDL";
-                OpenStoreActivity();
-        });
-
-        btnWILLYS.setOnClickListener((View view) -> {
-                butik = WILLYS; //"WILLYS";
-                OpenStoreActivity();
-        });
+        btnCOOP.setOnClickListener((View view) -> OpenStoreActivity(STORA_COOP_VALSVIKEN));
+        btnICA.setOnClickListener((View view) -> OpenStoreActivity(ICA_MAXI));
+        btnLIDL.setOnClickListener((View view) -> OpenStoreActivity(LIDL));
+        btnWILLYS.setOnClickListener((View view) -> OpenStoreActivity(WILLYS));
     }
 
     void OnFavouriteSwitched() {
@@ -103,15 +70,16 @@ public class ButikerActivity extends AppCompatActivity {
 
     private void SetFavouriteSwitches() {
         Log.i("DEBUG", "Setting switches");
-        AccountSettings.AddUpdateCallback(this, () -> {
-            switchWILLYS.setChecked(AccountSettings.IsWillysFavourited());
-            switchCOOP.setChecked(AccountSettings.IsCOOPFavourited());
-            switchICA.setChecked(AccountSettings.IsICAFavourited());
-            switchLIDL.setChecked(AccountSettings.IsLIDLFavourited());
+        AccountSettings.AddUpdateCallback(this, (UserSettingsMessage settings) -> {
+            switchWILLYS.setChecked(settings.IsWillysFavourited());
+            switchCOOP.setChecked(settings.IsCOOPFavourited());
+            switchICA.setChecked(settings.IsICAFavourited());
+            switchLIDL.setChecked(settings.IsLIDLFavourited());
         });
     }
 
-    public void OpenStoreActivity(){
+    public void OpenStoreActivity(String Butik){
+        butik = Butik;
         AccountSettings.RemoveUpdateCallback(this);
         Intent intent = new Intent(this, ReadDatabase.class);
         intent.putExtra("Butik", butik);
