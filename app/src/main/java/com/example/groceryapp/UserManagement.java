@@ -18,8 +18,8 @@ import java.util.Map;
 public class UserManagement {
     static final String USER_MANAGEMENT_LOG_TAG = "User Management Logs";
 
-    static Map<Object, Runnable> OnLoginCallbacks = new HashMap<>();
-    static Map<Object, Runnable> OnLogoutCallbacks = new HashMap<>();
+    private static Map<Object, Runnable> OnLoginCallbacks = new HashMap<>();
+    private static Map<Object, Runnable> OnLogoutCallbacks = new HashMap<>();
 
     static FirebaseAuth auth = null;
     static private FirebaseAuth getAuth() {
@@ -27,6 +27,17 @@ public class UserManagement {
             auth = FirebaseAuth.getInstance();
         }
         return auth;
+    }
+
+    private static void CallOnLoginCallbacks() {
+        for (Runnable callback : OnLoginCallbacks.values()) {
+            try {
+                callback.run();
+            }
+            catch (Exception e) {
+                Log.i(USER_MANAGEMENT_LOG_TAG, "Error in login callback", e);
+            }
+        }
     }
 
     public static void RegisterOnLoginCallback(Object caller, Runnable callback) {
@@ -38,6 +49,17 @@ public class UserManagement {
 
     public static void RemoveOnLoginCallback(Object caller) {
         OnLoginCallbacks.remove(caller);
+    }
+
+    private static void CallOnLogoutCallbacks() {
+        for (Runnable callback : OnLogoutCallbacks.values()) {
+            try {
+                callback.run();
+            }
+            catch (Exception e) {
+                Log.i(USER_MANAGEMENT_LOG_TAG, "Error in logout callback", e);
+            }
+        }
     }
 
     public static void RegisterOnLogoutCallback(Object caller, Runnable callback) {
@@ -55,6 +77,7 @@ public class UserManagement {
                 .addOnCompleteListener((Task<AuthResult> task) -> {
                     if (task.isSuccessful()) {
                         Log.i(USER_MANAGEMENT_LOG_TAG, "Created new user");
+                        CallOnLoginCallbacks();
                         return;
                     }
                     if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
@@ -84,6 +107,7 @@ public class UserManagement {
                 .addOnCompleteListener((Task<AuthResult> task) -> {
                     if (task.isSuccessful()) {
                         Log.i(USER_MANAGEMENT_LOG_TAG, "Logged in user");
+                        CallOnLoginCallbacks();
                         return;
                     }
                     if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
@@ -121,6 +145,7 @@ public class UserManagement {
     }
 
     public static void signOut() {
+        CallOnLogoutCallbacks();
         getAuth().signOut();
     }
 

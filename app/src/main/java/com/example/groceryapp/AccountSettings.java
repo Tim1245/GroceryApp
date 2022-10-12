@@ -14,76 +14,96 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AccountSettings {
+    // Must be the first variable because it is not initialised before Init somehow otherwise
+    private static final ValueEventListener DatabaseListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            Log.i(ACCOUNT_SETTINGS_LOG_TAG, "Change to user settings detected");
+            UserSettingsMessage settings = settings = GetSettingsFromSnapshot(snapshot);
+            if (settings == null) {
+                Log.e(ACCOUNT_SETTINGS_LOG_TAG, "Could not read the updated database snapshot");
+                return;
+            }
+            last_settings = settings;
+            Log.i(ACCOUNT_SETTINGS_LOG_TAG, "The new favourites settings are: " + settings.toString());
+            for (Consumer<UserSettingsMessage> callback : Callbacks.values()) {
+                try {
+                    callback.accept(settings);
+                }
+                catch(Exception e) {
+                    Log.e(ACCOUNT_SETTINGS_LOG_TAG, "Error in a callback", e);
+                }
+            }
+        }
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+            Log.e(ACCOUNT_SETTINGS_LOG_TAG, "This should never be triggered?", error.toException());
+        }
+    };
+
+    private static AccountSettings Singleton = new AccountSettings();
     private static final Map<Object, Consumer<UserSettingsMessage>> Callbacks = new HashMap<>();
     private static FirebaseDatabase database;
-    private static boolean initieated = false;
     private static UserSettingsMessage last_settings = null;
+
+    private static String ACCOUNT_SETTINGS_LOG_TAG = "ACCOUNT SETTINGS LOG";
 
     private static final String STORA_COOP_VALSVIKEN = "STORA_COOP_VALSVIKEN";
     private static final String ICA_MAXI = "ICA-MAXI";
     private static final String LIDL = "LIDL";
     private static final String WILLYS = "WILLYS";
 
-    private static FirebaseDatabase db() {
-        Log.i("DEBUG", "Getting db reference or init");
+    private AccountSettings() {
         Init();
-        return database;
     }
 
     private static void Init() {
-        if (initieated) {
-            return;
-        }
-        if (database == null) {
-            database = FirebaseDatabase.getInstance();
-        }
-        if (UserManagement.isUserLoggedIn() == false) {
-            return;
-        }
+        Log.i(ACCOUNT_SETTINGS_LOG_TAG, "Initiated the account settings object");
+        database = FirebaseDatabase.getInstance();
+        UserManagement.RegisterOnLoginCallback(Singleton, AccountSettings::AddDatabaseListener);
+        UserManagement.RegisterOnLogoutCallback(Singleton, AccountSettings::RemoveDatabaseListener);
+    }
+
+    private static void AddDatabaseListener() {
         try {
             database
                     .getReference()
                     .child("Users")
                     .child(UserManagement.GetUserUID())
-                    .addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            Log.i("DEBUG", "Change detected");
-                            UserSettingsMessage settings = GetSettingsFromSnapshot(snapshot);
-                            if (settings == null) {
-                                Log.i("DEBUG ERROR", "Updated data was not in assumed format");
-                                return;
-                            }
-                            last_settings = settings;
-                            for (Consumer<UserSettingsMessage> callback : Callbacks.values()) {
-                                try {
-                                    callback.accept(settings);
-                                }
-                                catch(Exception e) {
-                                    Log.i("Account settings error", "Error in a callback", e);
-                                }
-                            }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
+                    .addValueEventListener(DatabaseListener);
+            Log.i(ACCOUNT_SETTINGS_LOG_TAG, "Added a database listener");
         }
         catch (Exception e) {
-
+            Log.e(ACCOUNT_SETTINGS_LOG_TAG, "Could not register database listener, (listener == null) = " + (DatabaseListener == null), e);
         }
     }
 
-    public static void AddUpdateCallback(Object caller, Consumer<UserSettingsMessage> callback) {
-        Init();
+    private static void RemoveDatabaseListener() {
+        try {
+            database
+                    .getReference()
+                    .child("Users")
+                    .child(UserManagement.GetUserUID())
+                    .removeEventListener(DatabaseListener);
+            last_settings = null;
+            Log.i(ACCOUNT_SETTINGS_LOG_TAG, "Removed a database listener");
+        }
+        catch(Exception e) {
+            Log.e(ACCOUNT_SETTINGS_LOG_TAG, "Could not remove database listener", e);
+        }
+    }
+
+    public static void AddUserSettingsUpdateCallback(Object caller, Consumer<UserSettingsMessage> callback) {
+        Log.i(ACCOUNT_SETTINGS_LOG_TAG, "Recieved new callback for user settings updated");
         Callbacks.put(caller, callback);
         if (last_settings != null) {
+            Log.i(ACCOUNT_SETTINGS_LOG_TAG, "Triggering new callback immediately");
             callback.accept(last_settings);
         }
     }
 
-    public static void RemoveUpdateCallback(Object caller) {
+    public static void RemoveUserSettingsUpdateCallback(Object caller) {
+        Log.i(ACCOUNT_SETTINGS_LOG_TAG, "Removed a callback for user settings updated");
         Callbacks.remove(caller);
     }
 
@@ -100,7 +120,7 @@ public class AccountSettings {
             }
         }
         catch(Exception e) {
-
+            Log.e(ACCOUNT_SETTINGS_LOG_TAG, "Could not create a UserSettingsMessage instance from snapshot", e);
         }
         return null;
     }
@@ -113,8 +133,7 @@ public class AccountSettings {
         user.put(LIDL, lidl);
         try {
             String UID = UserManagement.GetUserUID();
-            Log.i("FAVOURITES TEST", "Attempting to store updated favourites");
-            db()
+            database
                     .getReference()
                     .child("Users")
                     .child(UID)
@@ -128,7 +147,7 @@ public class AccountSettings {
                     });
         }
         catch(Exception e) {
-            Log.w("ACCOUNT SETTINGS ERROR", "Encountered error when saving favourites", e);
+            Log.w(ACCOUNT_SETTINGS_LOG_TAG, "Encountered error when saving favourites", e);
         }
     }
 }

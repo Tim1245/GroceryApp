@@ -17,7 +17,6 @@ public class ButikerActivity extends AppCompatActivity {
     static final String LIDL = "LIDL";
     static final String WILLYS = "WILLYS";
 
-    String butik;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     Switch switchWILLYS;
@@ -39,10 +38,6 @@ public class ButikerActivity extends AppCompatActivity {
         ImageView btnLIDL = findViewById(R.id.lidlbtn);
         switchLIDL = findViewById(R.id.switch_lidl);
 
-        if (UserManagement.isUserLoggedIn()) {
-            SetFavouriteSwitches();
-        }
-
         switchWILLYS.setOnClickListener((View view) -> OnFavouriteSwitched());
         switchCOOP.setOnClickListener((View view) -> OnFavouriteSwitched());
         switchICA.setOnClickListener((View view) -> OnFavouriteSwitched());
@@ -52,6 +47,24 @@ public class ButikerActivity extends AppCompatActivity {
         btnICA.setOnClickListener((View view) -> OpenStoreActivity(ICA_MAXI));
         btnLIDL.setOnClickListener((View view) -> OpenStoreActivity(LIDL));
         btnWILLYS.setOnClickListener((View view) -> OpenStoreActivity(WILLYS));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        AccountSettings.AddUserSettingsUpdateCallback(this, (UserSettingsMessage settings) -> {
+            Log.i("ACCOUNT SETTINGS LOG", "Updating switches, " + settings.toString());
+            switchWILLYS.setChecked(settings.IsWILLYSFavoured());
+            switchCOOP.setChecked(settings.IsCOOPFavoured());
+            switchICA.setChecked(settings.IsICAFavoured());
+            switchLIDL.setChecked(settings.IsLIDLFavoured());
+        });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        AccountSettings.RemoveUserSettingsUpdateCallback(this);
     }
 
     void OnFavouriteSwitched() {
@@ -68,19 +81,8 @@ public class ButikerActivity extends AppCompatActivity {
         }
     }
 
-    private void SetFavouriteSwitches() {
-        Log.i("DEBUG", "Setting switches");
-        AccountSettings.AddUpdateCallback(this, (UserSettingsMessage settings) -> {
-            switchWILLYS.setChecked(settings.IsWillysFavourited());
-            switchCOOP.setChecked(settings.IsCOOPFavourited());
-            switchICA.setChecked(settings.IsICAFavourited());
-            switchLIDL.setChecked(settings.IsLIDLFavourited());
-        });
-    }
-
-    public void OpenStoreActivity(String Butik){
-        butik = Butik;
-        AccountSettings.RemoveUpdateCallback(this);
+    public void OpenStoreActivity(String butik){
+        AccountSettings.RemoveUserSettingsUpdateCallback(this);
         Intent intent = new Intent(this, ReadDatabase.class);
         intent.putExtra("Butik", butik);
         startActivity(intent);
