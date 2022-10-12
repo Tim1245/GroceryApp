@@ -16,6 +16,8 @@ public class ButikerActivity extends AppCompatActivity {
     static final String ICA_MAXI = "ICA-MAXI";
     static final String LIDL = "LIDL";
     static final String WILLYS = "WILLYS";
+    static final String ALL = "ALL";
+
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
@@ -37,6 +39,7 @@ public class ButikerActivity extends AppCompatActivity {
         switchICA = findViewById(R.id.switch_maxi);
         ImageView btnLIDL = findViewById(R.id.lidlbtn);
         switchLIDL = findViewById(R.id.switch_lidl);
+        ImageView btnALL = findViewById(R.id.allbtn);
 
         switchWILLYS.setOnClickListener((View view) -> OnFavouriteSwitched());
         switchCOOP.setOnClickListener((View view) -> OnFavouriteSwitched());
@@ -47,6 +50,8 @@ public class ButikerActivity extends AppCompatActivity {
         btnICA.setOnClickListener((View view) -> OpenStoreActivity(ICA_MAXI));
         btnLIDL.setOnClickListener((View view) -> OpenStoreActivity(LIDL));
         btnWILLYS.setOnClickListener((View view) -> OpenStoreActivity(WILLYS));
+        btnALL.setOnClickListener((View view) -> OpenStoreActivity(ALL));
+
     }
 
     @Override

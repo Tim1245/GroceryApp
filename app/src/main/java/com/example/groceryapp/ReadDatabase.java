@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,15 +41,16 @@ public class ReadDatabase extends AppCompatActivity {
     private ArrayList<MainModel> productList;
     private Adapter adapter;
     private SearchView searchView;
-    private ImageButton filterCategory;
+    private ImageButton filterByCategory;
+    private TextView categories;
 
     public static final String[] Categories={
             "ALL",
-            "FRUKT",
-            "Barn",
-            "BRÖD",
-            "KÖTT",
-            "Mejerivaror"
+            "Category 2",
+            "Category 3",
+            "Category 4",
+            "Category 5",
+            "Category 6"
     };
     // Get the database instance and store into object
     @Override
@@ -71,8 +73,8 @@ public class ReadDatabase extends AppCompatActivity {
                 return false;
             }
         });
-
-        filterCategory = findViewById(R.id.filterCategory);
+        categories = findViewById(R.id.categoriesTextview);
+        filterByCategory = findViewById(R.id.filterByCategory);
         recyclerView = findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         String butik = getIntent().getStringExtra("Butik");
@@ -93,7 +95,7 @@ public class ReadDatabase extends AppCompatActivity {
         }
 
         //Categories
-        filterCategory.setOnClickListener(new View.OnClickListener() {
+        filterByCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ReadDatabase.this);
@@ -101,11 +103,14 @@ public class ReadDatabase extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 String selected = Categories[i];
+                                categories.setText("Showing: "+ selected);
+
                                 if(selected.equals("ALL"))
-                                    loadOne(ref,butik);
+                                    loadOne(ref, butik);
+
+
                                 else
                                     loadFiltered(ref, butik, selected);
-                                //newList= filterList(selected, productList);
 
                             }
                         })
@@ -215,21 +220,26 @@ public class ReadDatabase extends AppCompatActivity {
                 filteredList.add(item);
 
             }
-            else if(item.getTitle().toLowerCase().contains(filter.toLowerCase()) || item.getCategory().toLowerCase().contains(filter.toLowerCase())){
+            else if(item.getTitle().toLowerCase().contains(filter.toLowerCase())){
                 filteredList.add(item);
+
             }
         }
-        if(filteredList.isEmpty()){
-            Toast.makeText(this, "No data found", Toast.LENGTH_SHORT).show();
-        }else{
-            adapter.setFilteredList(filteredList,filter);
+        if(!filteredList.isEmpty()) {
+            adapter.setFilteredList(filteredList, filter);
         }
 
     }
     public class CustomComparator implements Comparator<MainModel> {
         @Override
         public int compare(MainModel o1, MainModel o2) {
-            return Double.compare(Double.valueOf(o1.getPrice().replaceAll("[^\\.0123456789]","")),Double.valueOf(o2.getPrice().replaceAll("[^\\.0123456789]","")));
+            o1.setPrice(o1.getPrice().replaceAll("[^\\.0123456789]",""));
+            o2.setPrice(o2.getPrice().replaceAll("[^\\.0123456789]",""));
+            if(!o1.getPrice().contains("."))
+                o1.setPrice(o1.getPrice() + ".00");
+            if(!o2.getPrice().contains("."))
+                o2.setPrice(o2.getPrice() + ".00");
+            return Double.compare(Double.valueOf(o1.getPrice()),Double.valueOf(o2.getPrice()));
         }
     }
 }

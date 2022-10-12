@@ -32,7 +32,6 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     private EditText input;
     private TextView textView;
-    FusedLocationProviderClient fusedLocationProviderClient;
 
     // Get the database instance and store into object
     @Override
@@ -45,14 +44,13 @@ public class MainActivity extends AppCompatActivity {
         ImageView btnMap = findViewById(R.id.mapbtn);
         ImageView btnLogOut = findViewById(R.id.logoutbtn);
         ImageView btnSettings = findViewById(R.id.settingbtn);
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        ImageView btnSearch = findViewById(R.id.searchbtn);
+
 
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 OpenActivity(MapsActivity.class);
-                //getLocation();
-
             }
         });
 
@@ -74,6 +72,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, ReadDatabase.class);
+                intent.putExtra("Butik", "ALL");
+                startActivity(intent);
+            }
+        });
+
+
 
     }
 
@@ -83,42 +92,5 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void getLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
 
-            return;
-        }
-        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-            @Override
-            public void onComplete(@NonNull Task<Location> task) {
-
-
-                Location location = task.getResult();
-                if (location != null) {
-
-                    try {
-                        Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
-                        List<Address> adresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                        Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-                        String Latitude = Double.toString(adresses.get(0).getLatitude());
-                        String Longitude = Double.toString(adresses.get(0).getLongitude());
-
-                        intent.putExtra("Latitude",Latitude);
-                        intent.putExtra("Longitude",Longitude);
-
-                        startActivity(intent);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-}}
+}

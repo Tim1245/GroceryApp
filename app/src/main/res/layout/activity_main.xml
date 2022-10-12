@@ -16,15 +16,14 @@
         android:layout_marginTop="44dp"
         android:background="@drawable/search_bar"
         app:iconifiedByDefault="false"
-        app:layout_constraintEnd_toStartOf="@+id/filterCategory"
+        app:layout_constraintEnd_toStartOf="@+id/filterByCategory"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:queryHint="Search" />
 
     <ImageButton
-        android:id="@+id/filterCategory"
+        android:id="@+id/filterByCategory"
         android:layout_width="45dp"
-
         android:layout_height="45dp"
         android:background="@null"
         android:scaleType="fitXY"
@@ -33,8 +32,26 @@
         app:layout_constraintTop_toTopOf="@+id/searchView"
         tools:ignore="MissingConstraints" />
 
+
+    <TextView
+        android:id="@+id/categoriesTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Showing All"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/searchView"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
+        tools:ignore="MissingConstraints" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
+        app:fastScrollHorizontalThumbDrawable="@drawable/thumb_drawable"
+        app:fastScrollHorizontalTrackDrawable="@drawable/line_drawable"
+        app:fastScrollVerticalThumbDrawable="@drawable/thumb_drawable"
+        app:fastScrollVerticalTrackDrawable="@drawable/line_drawable"
+        app:fastScrollEnabled="true"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
@@ -42,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchView"
+        app:layout_constraintTop_toBottomOf="@id/categoriesTextview"
 
         />
 
