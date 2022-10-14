@@ -46,12 +46,16 @@ public class ReadDatabase extends AppCompatActivity {
 
     public static final String[] Categories={
             "ALL",
-            "Category 2",
-            "Category 3",
-            "Category 4",
-            "Category 5",
-            "Category 6"
+            "Vegetariskt",
+            "Vegan",
+            "Kött, fågel, fisk",
+            "Mejeri",
+            "Dryck",
+            "Glass, godis & snacks",
+            "Bröd & kakor"
     };
+    //String[] Categories= getResources().getStringArray(R.array.Categories);
+
     // Get the database instance and store into object
     @Override
     protected void onCreate(Bundle savedInstanceState) {

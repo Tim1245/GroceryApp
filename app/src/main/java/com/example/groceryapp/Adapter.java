@@ -62,6 +62,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder>{
                 .error(com.firebase.ui.database.R.drawable.common_google_signin_btn_icon_dark_normal_background)
                 .into(holder.url_Image);
 
+
+
+
     }
 
     @Override

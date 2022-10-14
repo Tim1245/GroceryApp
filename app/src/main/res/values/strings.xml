@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">GroceryApp</string>
+
+    <string name="ALL">ALL</string>
+    <string name="Vegetariskt">Vegetariskt</string>
+    <string name="Vegan">Vegan</string>
+    <string name="Kött">Kött, fågel, fisk</string>
+    <string name="Mejeri">Mejeri</string>
+    <string name="Dryck">Dryck</string>
+    <string name="Glass">Glass, godis &amp; snacks</string>
+    <string name="Bröd">Bröd &amp; kakor</string>
+
+
+
+    <string-array name="Categories">
+        <item>@string/ALL</item>
+        <item>@string/Vegetariskt</item>
+        <item>@string/Vegan</item>
+        <item>@string/Kött</item>
+        <item>@string/Mejeri</item>
+        <item>@string/Dryck</item>
+        <item>@string/Glass</item>
+        <item>@string/Bröd</item>
+
+
+
+    </string-array>
 </resources>
