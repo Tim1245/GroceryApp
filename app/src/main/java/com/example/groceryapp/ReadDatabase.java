@@ -1,47 +1,32 @@
 package com.example.groceryapp;
 
-import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.gms.tasks.OnSuccessListener;
+import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-
-import androidx.appcompat.widget.SearchView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
-import java.util.Locale;
 
 public class ReadDatabase extends AppCompatActivity {
     RecyclerView recyclerView;
-    MainAdapter mainAdapter;
+    //MainAdapter mainAdapter;
     DatabaseReference ref;
     private ArrayList<MainModel> productList;
     private Adapter adapter;
-    private SearchView searchView;
-    private ImageButton filterByCategory;
     private TextView categories;
 
     public static final String[] Categories={
@@ -54,7 +39,6 @@ public class ReadDatabase extends AppCompatActivity {
             "Glass, godis & snacks",
             "Bröd & kakor"
     };
-    //String[] Categories= getResources().getStringArray(R.array.Categories);
 
     // Get the database instance and store into object
     @Override
@@ -63,7 +47,7 @@ public class ReadDatabase extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Search bar
-        searchView = findViewById(R.id.searchView);
+        SearchView searchView = findViewById(R.id.searchView);
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -78,7 +62,7 @@ public class ReadDatabase extends AppCompatActivity {
             }
         });
         categories = findViewById(R.id.categoriesTextview);
-        filterByCategory = findViewById(R.id.filterByCategory);
+        ImageButton filterByCategory = findViewById(R.id.filterByCategory);
         recyclerView = findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         String butik = getIntent().getStringExtra("Butik");
@@ -99,27 +83,24 @@ public class ReadDatabase extends AppCompatActivity {
         }
 
         //Categories
-        filterByCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ReadDatabase.this);
-                builder.setTitle("Choose Category: ").setItems(Categories, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                String selected = Categories[i];
-                                categories.setText("Showing: "+ selected);
+        filterByCategory.setOnClickListener(view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(ReadDatabase.this);
+            builder.setTitle("Choose Category: ").setItems(Categories, (dialogInterface, i) -> {
+                String selected = Categories[i];
+                categories.setText("Showing: "+ selected);
 
-                                if(selected.equals("ALL"))
-                                    loadOne(ref, butik);
+                if(selected.equals("ALL") && !butik.equals("ALL")){
+                    loadOne(ref, butik);}
+                else if(selected.equals("ALL") && butik.equals("ALL") ){
+                    loadAll(ref);}
+                else if(!selected.equals("ALL") && butik.equals("ALL")){
+                    loadAllFiltered(ref, selected);}
+                else if(!selected.equals("ALL") && !butik.equals("ALL")){
+                    loadFiltered(ref, butik, selected);}
 
 
-                                else
-                                    loadFiltered(ref, butik, selected);
-
-                            }
-                        })
-                        .show();
-            }
+            })
+                    .show();
         });
 
 
@@ -190,7 +171,7 @@ public class ReadDatabase extends AppCompatActivity {
         });
     }
 
-    public void loadFiltered(DatabaseReference reference, String butik, String filter){
+    public void loadFiltered(DatabaseReference reference,String butik, String filter){
         reference.child(butik).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -216,6 +197,34 @@ public class ReadDatabase extends AppCompatActivity {
 
     }
 
+    public void loadAllFiltered(DatabaseReference reference, String filter){
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                productList.clear();
+                for (DataSnapshot ds1: snapshot.getChildren()) {
+                    for (DataSnapshot ds : ds1.getChildren()) {
+                        String category = ds.child("category").getValue(String.class);
+                        if (category.equals(filter)) {
+                            MainModel model = ds.getValue(MainModel.class);
+                            productList.add(model);
+                        }
+                        Collections.sort(productList, new CustomComparator());
+                        adapter.notifyDataSetChanged();
+                    }
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     public void searchList(String filter){
         ArrayList<MainModel> filteredList = new ArrayList<>();
 
@@ -237,13 +246,13 @@ public class ReadDatabase extends AppCompatActivity {
     public class CustomComparator implements Comparator<MainModel> {
         @Override
         public int compare(MainModel o1, MainModel o2) {
-            o1.setPrice(o1.getPrice().replaceAll("[^\\.0123456789]",""));
-            o2.setPrice(o2.getPrice().replaceAll("[^\\.0123456789]",""));
+            o1.setPrice(o1.getPrice().replaceAll("[^.0123456789]",""));
+            o2.setPrice(o2.getPrice().replaceAll("[^.0123456789]",""));
             if(!o1.getPrice().contains("."))
                 o1.setPrice(o1.getPrice() + ".00");
             if(!o2.getPrice().contains("."))
                 o2.setPrice(o2.getPrice() + ".00");
-            return Double.compare(Double.valueOf(o1.getPrice()),Double.valueOf(o2.getPrice()));
+            return Double.compare(Double.parseDouble(o1.getPrice()),Double.parseDouble(o2.getPrice()));
         }
     }
 }

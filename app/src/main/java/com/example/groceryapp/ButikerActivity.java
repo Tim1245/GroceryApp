@@ -1,7 +1,5 @@
 package com.example.groceryapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,7 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Switch;
 
-import com.google.firebase.database.FirebaseDatabase;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ButikerActivity extends AppCompatActivity {
     static final String STORA_COOP_VALSVIKEN = "STORA_COOP_VALSVIKEN";
@@ -19,7 +17,6 @@ public class ButikerActivity extends AppCompatActivity {
     static final String ALL = "ALL";
 
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     Switch switchWILLYS;
     Switch switchCOOP;

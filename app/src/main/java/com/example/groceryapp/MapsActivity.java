@@ -15,9 +15,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.example.groceryapp.databinding.ActivityMapsBinding;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -26,7 +24,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
@@ -84,36 +81,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setMyLocationEnabled(true);*/
 
         Location coopBergvikLoc=new Location("Coop Bergvik");
-        coopBergvikLoc.setLatitude(59.377955);
-        coopBergvikLoc.setLongitude(13.425271);
+        coopBergvikLoc.setLatitude(59.37722325348227);
+        coopBergvikLoc.setLongitude(13.426254883058016);
 
         Location coopValsvikenLoc=new Location("Coop Välsviken");
-        coopValsvikenLoc.setLatitude(59.39631609438561);
-        coopValsvikenLoc.setLongitude(13.575848584939761);
+        coopValsvikenLoc.setLatitude(59.3962833222748);
+        coopValsvikenLoc.setLongitude(13.575773483058837);
 
         Location icaValsvikenLoc=new Location("Ica Välsviken");
-        icaValsvikenLoc.setLatitude(59.39636019797852);
-        icaValsvikenLoc.setLongitude(13.580784956104168);
+        icaValsvikenLoc.setLatitude(59.396717882843035);
+        icaValsvikenLoc.setLongitude(13.580274721690687);
 
         Location icaBergvikLoc=new Location("Ica Bergvik");
-        icaBergvikLoc.setLatitude(59.37816709297543);
-        icaBergvikLoc.setLongitude(13.429414902125185);
+        icaBergvikLoc.setLatitude(59.37659741178295);
+        icaBergvikLoc.setLongitude(13.428619283057982);
 
         Location willysCityLoc=new Location("Willys City");
-        willysCityLoc.setLatitude(59.37873877071142);
-        willysCityLoc.setLongitude(13.509179240196127);
+        willysCityLoc.setLatitude(59.377544112785145);
+        willysCityLoc.setLongitude(13.508946613742117);
 
         Location willysVaxnasLoc=new Location("Willys Våxnäs");
-        willysVaxnasLoc.setLatitude(59.39007983348828);
-        willysVaxnasLoc.setLongitude(13.481656116945008);
+        willysVaxnasLoc.setLatitude(59.38797373919289);
+        willysVaxnasLoc.setLongitude(13.481932913742554);
 
         Location lidlVaxnasLoc=new Location("Lidl Våxnäs");
-        lidlVaxnasLoc.setLatitude(59.38695327943067);
-        lidlVaxnasLoc.setLongitude(13.47556768120986);
+        lidlVaxnasLoc.setLatitude(59.38697513352154);
+        lidlVaxnasLoc.setLongitude(13.475642783058444);
 
         Location lidlKroppkarrLoc=new Location("Lidl Kroppkärr");
-        lidlKroppkarrLoc.setLatitude(59.39815733970923);
-        lidlKroppkarrLoc.setLongitude(13.535097127236481);
+        lidlKroppkarrLoc.setLatitude(59.398146416269896);
+        lidlKroppkarrLoc.setLongitude(13.535086398400976);
 
 
 
@@ -131,14 +128,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         LatLng karlstad = new LatLng(59.404390283954065, 13.512529182246308);
-        LatLng coopBergvik = new LatLng(59.377955, 13.425271);
-        LatLng coopValsviken = new LatLng(59.39631609438561, 13.575848584939761);
-        LatLng icaValsviken = new LatLng(59.39636019797852, 13.580784956104168);
-        LatLng willysCity = new LatLng(59.37873877071142, 13.509179240196127);
-        LatLng willysVaxnas = new LatLng(59.39007983348828, 13.481656116945008);
-        LatLng icaBergvik = new LatLng(59.37816709297543, 13.429414902125185);
-        LatLng lidlVaxnas = new LatLng(59.38695327943067, 13.47556768120986);
-        LatLng lidlKroppkarr = new LatLng(59.39815733970923, 13.535097127236481);
+        LatLng coopBergvik = new LatLng(59.37722325348227, 13.426254883058016);
+        LatLng coopValsviken = new LatLng(59.3962833222748, 13.575773483058837);
+        LatLng icaValsviken = new LatLng(59.396717882843035, 13.580274721690687);
+        LatLng icaBergvik = new LatLng(59.37659741178295, 13.428619283057982);
+        LatLng willysCity = new LatLng(59.377544112785145, 13.508946613742117);
+        LatLng willysVaxnas = new LatLng(59.38797373919289, 13.481932913742554);
+        LatLng lidlVaxnas = new LatLng(59.38697513352154, 13.475642783058444);
+        LatLng lidlKroppkarr = new LatLng(59.398146416269896, 13.535086398400976);
 
         //LatLng icaSuperMarketWallinder = new LatLng(59.39483129478293, 13.517329998415354);
         //LatLng icaSuperMarketHaga = new LatLng(59.38535399115744, 13.515270971750242);
@@ -162,6 +159,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(icaSuperMarketFanfar).title("Ica Supermarket Fanfaren"));*/
         mMap.moveCamera(CameraUpdateFactory.newLatLng(karlstad));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(karlstad, 11));
+        mMap.getUiSettings().setZoomControlsEnabled(true);
         getCurrentLocation();
     }
 
@@ -176,19 +174,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locationRequest.setFastestInterval(5000);
 
         Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null) {
-                    currentLocation = location;
+        task.addOnSuccessListener(location -> {
+            if (location != null) {
+                currentLocation = location;
 
-                    LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                    MarkerOptions current = new MarkerOptions().position(latLng).title("Current location");
-                    current.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.navigation)));
-                    mMap.addMarker(current);
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-                }
+                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                MarkerOptions current = new MarkerOptions().position(latLng).title("Current location");
+                current.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.navigation)));
+                mMap.addMarker(current);
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
             }
         });
 
@@ -220,6 +215,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             LatLng latLng1 = new LatLng(location.getLatitude(), location.getLongitude());
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng1, 15));
             Toast.makeText(getApplicationContext(), "Closest Store is: "+ location.getProvider(), Toast.LENGTH_SHORT).show();
+        }else{
+            getCurrentLocation();
         }
 
 
