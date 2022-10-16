@@ -33,8 +33,9 @@ public class ReadDatabase extends AppCompatActivity {
             "ALL",
             "Vegetariskt",
             "Vegan",
+            "Frukt & grönsaker",
             "Kött, fågel, fisk",
-            "Mejeri",
+            "Mejeri, ost och ägg",
             "Dryck",
             "Glass, godis & snacks",
             "Bröd & kakor"
