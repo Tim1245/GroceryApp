@@ -47,6 +47,7 @@ public class NotificationHandler extends Service {
         FirebaseDatabase
                 .getInstance()
                 .getReference()
+                .child("Butik")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -66,6 +67,7 @@ public class NotificationHandler extends Service {
 
     @Override
     public void onDestroy() {
+        Log.i(TAG, "Destroyed notification handler");
         super.onDestroy();
     }
 
@@ -75,18 +77,26 @@ public class NotificationHandler extends Service {
             count += 1;
             return;
         }
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(
+                this,
+                0,
+                new Intent(
+                        this,
+                        ButikerActivity.class),
+                PendingIntent.FLAG_IMMUTABLE);
+
         createNotificationChannel(this);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.bell)
                 .setContentTitle("We have new offers")
-                .setContentText("Much longer text that cannot fit one line...")
-                .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText("Much longer text that cannot fit one line..."))
+                .setContentText("There are new offers available")
+                .setContentIntent(pendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        // notificationId is a unique int for each notification that you must define
 
+        // notificationId is a unique int for each notification that you must define
         Log.i(TAG, "Sending notification number " +  count);
         notificationManager.notify(count, builder.build());
         count += 1;

@@ -61,29 +61,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-
+        startService(new Intent(this, NotificationHandler.class));
 
     }
 
-    public void OpenActivity(Class activity){
+    public void OpenActivity(Class activity) {
         Intent intent = new Intent(this, activity);
 
         startActivity(intent);
-    }
-
-    @Override
-    public void onStop() {
-        // Testig code
-        Log.i("DEBUG", "Main activity had onstop called");
-        startService(new Intent(this, NotificationHandler.class));
-        // End of testing code
-        super.onStop();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.i("DEBUG", "Main activity had onstart called");
-        stopService(new Intent(this, NotificationHandler.class));
     }
 }
