@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -65,7 +66,6 @@ public class NotificationHandler extends Service {
 
     @Override
     public void onDestroy() {
-        Log.e(TAG, "onDestroy");
         super.onDestroy();
     }
 
