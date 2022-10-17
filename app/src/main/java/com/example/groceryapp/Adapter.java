@@ -1,7 +1,6 @@
 package com.example.groceryapp;
 
 import android.content.Context;
-import android.view.ContentInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +14,9 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder>{
 
-    private Context context;
+    private final Context context;
     public ArrayList<MainModel> productList;
     public ArrayList<MainModel> List;
 
@@ -62,6 +59,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder>{
                 .error(com.firebase.ui.database.R.drawable.common_google_signin_btn_icon_dark_normal_background)
                 .into(holder.url_Image);
 
+
+
+
     }
 
     @Override
@@ -69,7 +69,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder>{
         return productList.size();
     }
 
-    class myViewHolder extends RecyclerView.ViewHolder{
+    static class myViewHolder extends RecyclerView.ViewHolder{
         ImageView url_Image;
         TextView title, price, size;
 
