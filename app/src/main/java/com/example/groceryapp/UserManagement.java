@@ -4,8 +4,13 @@ import com.google.firebase.auth.*;
 
 import android.security.keystore.UserNotAuthenticatedException;
 import android.util.Log;
+import android.widget.EditText;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -13,17 +18,20 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.w3c.dom.Text;
+
 import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("unused")
 public class UserManagement {
     static final String USER_MANAGEMENT_LOG_TAG = "User Management Logs";
-
     private static Map<Object, Runnable> OnLoginCallbacks = new HashMap<>();
     private static Map<Object, Runnable> OnLogoutCallbacks = new HashMap<>();
 
     static FirebaseAuth auth = null;
+
+
     static private FirebaseAuth getAuth() {
         if (auth == null) {
             auth = FirebaseAuth.getInstance();
@@ -72,7 +80,8 @@ public class UserManagement {
         OnLogoutCallbacks.remove(caller);
     }
 
-    public static void createUserDefault(String email, String password, OnCompleteListener<AuthResult> onComplete) {
+    public static void createUserDefault(String email, String password, TextView email_view, OnCompleteListener<AuthResult> onComplete) {
+        LoginAndEmailFailure loginAndEmailFailure = new LoginAndEmailFailure();
         getAuth()
                 .createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(onComplete)
@@ -87,6 +96,8 @@ public class UserManagement {
                     }
                     else if (task.getException() instanceof  FirebaseAuthUserCollisionException) {
                         Log.i(USER_MANAGEMENT_LOG_TAG, "A user with that mail address already exists", task.getException());
+                        loginAndEmailFailure.errorMessageEmailExist(email_view);
+
                     }
                     else {
                         Log.i(USER_MANAGEMENT_LOG_TAG, "Miscellaneous error when creating user", task.getException());
@@ -94,15 +105,16 @@ public class UserManagement {
                 });
     }
 
-    public static void createUserDefault(String email, String password) {
-        createUserDefault(email, password, null);
+    public static void createUserDefault(String email, String password, TextView email_view) {
+        createUserDefault(email, password, email_view, null);
     }
 
     public static FirebaseUser getUserInfo() {
         return getAuth().getCurrentUser();
     }
 
-    public static void loginUser(String email, String password, OnCompleteListener<AuthResult> onComplete) {
+    public static void loginUser(String email, String password, TextView email_view, TextView password_view, OnCompleteListener<AuthResult> onComplete) {
+        LoginAndEmailFailure loginAndEmailFailure = new LoginAndEmailFailure();
         getAuth()
                 .signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(onComplete)
@@ -110,13 +122,16 @@ public class UserManagement {
                     if (task.isSuccessful()) {
                         Log.i(USER_MANAGEMENT_LOG_TAG, "Logged in user");
                         CallOnLoginCallbacks();
+
                         return;
                     }
                     if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                         Log.i(USER_MANAGEMENT_LOG_TAG, "Could not log in. Likely incorrect password", task.getException());
+                        loginAndEmailFailure.errorMessagePassword(password_view);
                     }
                     else if (task.getException() instanceof FirebaseAuthInvalidUserException) {
                         Log.i(USER_MANAGEMENT_LOG_TAG, "Could not log in. No user with that mail address", task.getException());
+                        loginAndEmailFailure.errorMessageEmail(email_view);
                     }
                     else {
                         Log.i(USER_MANAGEMENT_LOG_TAG, "Could not log in. Misc error", task.getException());
@@ -124,8 +139,8 @@ public class UserManagement {
                 });
     }
 
-    public static void loginUser(String email, String password) {
-        loginUser(email, password, null);
+    public static void loginUser(String email, String password, TextView email_view, TextView password_view) {
+        loginUser(email, password, email_view, password_view, null);
     }
 
     public static void passwordReset(String email, OnCompleteListener<Void> onComplete) {

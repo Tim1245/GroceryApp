@@ -5,6 +5,7 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
 public class LoginActivity extends AppCompatActivity {
+    LoginAndEmailFailure loginAndEmailFailure = new LoginAndEmailFailure();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("Login UI test", "User opened the login page");
@@ -36,9 +38,10 @@ public class LoginActivity extends AppCompatActivity {
             String password = password_view.getText().toString();
             if (email.isEmpty() || password.isEmpty()) {
                 Log.i("Login UI test", "User attempting to login without password or email");
+                loginAndEmailFailure.checkPasswordAndEmail(email, password, email_view, password_view);
                 return;
             }
-            UserManagement.createUserDefault(email, password, (Task<AuthResult> task) -> {
+            UserManagement.createUserDefault(email, password, email_view, (Task<AuthResult> task) -> {
                 if (task.isSuccessful()) {
                     Log.i("Login UI test", "User has been created!");
                     finish();
@@ -56,9 +59,10 @@ public class LoginActivity extends AppCompatActivity {
             String password = password_view.getText().toString();
             if (email.isEmpty() || password.isEmpty()) {
                 Log.i("Login UI test", "User attempting to login without password or email");
+                loginAndEmailFailure.checkPasswordAndEmail(email, password, email_view, password_view);
                 return;
             }
-            UserManagement.loginUser(email, password, (Task<AuthResult> task) -> {
+            UserManagement.loginUser(email, password, email_view, password_view, (Task<AuthResult> task) -> {
                 if (task.isSuccessful()) {
                     Log.i("Login UI test", "User has been logged in!");
                     finish();

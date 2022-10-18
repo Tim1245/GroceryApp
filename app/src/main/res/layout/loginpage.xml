@@ -55,6 +55,8 @@
         android:layout_width="43dp"
         android:layout_height="19dp"
         android:layout_marginBottom="12dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:text="Email:"
         app:layout_constraintBottom_toTopOf="@+id/email_text_field"
         app:layout_constraintStart_toStartOf="@+id/email_text_field" />
@@ -64,6 +66,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:text="Password:"
         app:layout_constraintBottom_toTopOf="@+id/password_text_field"
         app:layout_constraintStart_toStartOf="@+id/password_text_field" />
