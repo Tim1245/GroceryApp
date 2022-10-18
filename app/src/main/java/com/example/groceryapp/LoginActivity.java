@@ -54,6 +54,10 @@ public class LoginActivity extends AppCompatActivity {
             Log.i("Login UI test", "User attempting to log in");
             String email = email_view.getText().toString();
             String password = password_view.getText().toString();
+            if (email.isEmpty() || password.isEmpty()) {
+                Log.i("Login UI test", "User attempting to login without password or email");
+                return;
+            }
             UserManagement.loginUser(email, password, (Task<AuthResult> task) -> {
                 if (task.isSuccessful()) {
                     Log.i("Login UI test", "User has been logged in!");
