@@ -18,9 +18,10 @@ public class LoginActivity extends AppCompatActivity {
         Log.i("Login UI test", "User opened the login page");
         super.onCreate(savedInstanceState);
 
-        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder(StrictMode.getVmPolicy())
-                .detectLeakedClosableObjects()
-                .build());
+        // Code used to find bugs previously
+        //StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder(StrictMode.getVmPolicy())
+        //        .detectLeakedClosableObjects()
+        //        .build());
 
         setContentView(R.layout.loginpage);
 
@@ -33,6 +34,10 @@ public class LoginActivity extends AppCompatActivity {
             Log.i("Login UI test", "User attempting to register");
             String email = email_view.getText().toString();
             String password = password_view.getText().toString();
+            if (email.isEmpty() || password.isEmpty()) {
+                Log.i("Login UI test", "User attempting to login without password or email");
+                return;
+            }
             UserManagement.createUserDefault(email, password, (Task<AuthResult> task) -> {
                 if (task.isSuccessful()) {
                     Log.i("Login UI test", "User has been created!");
@@ -42,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.i("Login UI test", "Could not create in user");
                 }
             });
+            Log.i("Login UI test", "Past creating the callback");
         });
 
         login_btn.setOnClickListener((View view) -> {
