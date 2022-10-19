@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
                 loginAndEmailFailure.checkPasswordAndEmail(email, password, email_view, password_view);
                 return;
             }
-            UserManagement.createUserDefault(email, password, email_view, (Task<AuthResult> task) -> {
+            UserManagement.createUserDefault(email, password, email_view, password_view, (Task<AuthResult> task) -> {
                 if (task.isSuccessful()) {
                     Log.i("Login UI test", "User has been created!");
                     finish();

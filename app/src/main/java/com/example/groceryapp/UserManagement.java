@@ -80,7 +80,7 @@ public class UserManagement {
         OnLogoutCallbacks.remove(caller);
     }
 
-    public static void createUserDefault(String email, String password, TextView email_view, OnCompleteListener<AuthResult> onComplete) {
+    public static void createUserDefault(String email, String password, TextView email_view, TextView password_view, OnCompleteListener<AuthResult> onComplete) {
         LoginAndEmailFailure loginAndEmailFailure = new LoginAndEmailFailure();
         getAuth()
                 .createUserWithEmailAndPassword(email, password)
@@ -93,11 +93,11 @@ public class UserManagement {
                     }
                     if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                         Log.i(USER_MANAGEMENT_LOG_TAG, "Could not create user due to bad credentials.", task.getException());
+                        loginAndEmailFailure.errorPassWordShort(password_view);
                     }
                     else if (task.getException() instanceof  FirebaseAuthUserCollisionException) {
-                        Log.i(USER_MANAGEMENT_LOG_TAG, "A user with that mail address already exists", task.getException());
                         loginAndEmailFailure.errorMessageEmailExist(email_view);
-
+                        Log.i(USER_MANAGEMENT_LOG_TAG, "A user with that mail address already exists", task.getException());
                     }
                     else {
                         Log.i(USER_MANAGEMENT_LOG_TAG, "Miscellaneous error when creating user", task.getException());
@@ -105,8 +105,8 @@ public class UserManagement {
                 });
     }
 
-    public static void createUserDefault(String email, String password, TextView email_view) {
-        createUserDefault(email, password, email_view, null);
+    public static void createUserDefault(String email, String password, TextView email_view, TextView password_view) {
+        createUserDefault(email, password, email_view, password_view, null);
     }
 
     public static FirebaseUser getUserInfo() {
