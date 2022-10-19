@@ -32,8 +32,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    LocaleHelper localehelper = new LocaleHelper();
-    // Get the database instance and store into object
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        localehelper.onMake(this);
+        LocaleHelper.onMake(this);
         setContentView(R.layout.newhomepage);
         ImageView btnRead = findViewById(R.id.productbtn);
         ImageView btnMap = findViewById(R.id.mapbtn);
@@ -102,8 +100,14 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        startService(new Intent(this, NotificationHandler.class));
+        stopService(new Intent(this, NotificationHandler.class));
 
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        startService(new Intent(this, NotificationHandler.class));
     }
 
     public void OpenActivity(Class activity) {
