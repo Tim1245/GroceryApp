@@ -17,7 +17,7 @@ public class UserSettingsMessage {
     }
 
     private boolean fav_LIDL;
-    public boolean IsLIDLFavoured() {
+    public  boolean IsLIDLFavoured() {
         return fav_LIDL;
     }
 

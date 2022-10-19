@@ -3,6 +3,7 @@ package com.example.groceryapp;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -20,17 +21,16 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Locale;
 
 public class ReadDatabase extends AppCompatActivity {
     RecyclerView recyclerView;
-    //MainAdapter mainAdapter;
     DatabaseReference ref;
     private ArrayList<MainModel> productList;
     private Adapter adapter;
     private TextView categories;
-
     public static final String[] Categories={
-            "ALL",
+            "All",
             "Vegetariskt",
             "Vegan",
             "Frukt & grönsaker",
@@ -38,7 +38,8 @@ public class ReadDatabase extends AppCompatActivity {
             "Mejeri, ost och ägg",
             "Dryck",
             "Glass, godis & snacks",
-            "Bröd & kakor"
+            "Bröd & kakor",
+            "Övrigt"
     };
 
     // Get the database instance and store into object
@@ -68,80 +69,57 @@ public class ReadDatabase extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         String butik = getIntent().getStringExtra("Butik");
 
-        /*FirebaseRecyclerOptions<MainModel> options=
-                new FirebaseRecyclerOptions.Builder<MainModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Butik").child(butik), MainModel.class)
-                        .build();*/
         productList = new ArrayList<>();
 
         adapter = new Adapter(ReadDatabase.this, productList);
         recyclerView.setAdapter(adapter);
         ref = FirebaseDatabase.getInstance().getReference("Butik");
-        if(butik.equals("ALL")){
-            loadAll(ref);
+
+        if (butik.equals("ALL")) {
+            loadAll(ref, "All");
         } else {
-            loadOne(ref, butik);
+            loadOne(ref, butik, "All");
         }
+
 
         //Categories
         filterByCategory.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(ReadDatabase.this);
             builder.setTitle("Choose Category: ").setItems(Categories, (dialogInterface, i) -> {
-                String selected = Categories[i];
-                categories.setText("Showing: "+ selected);
+                        String selected = Categories[i];
+                        categories.setText(getString(R.string.showing) + " " + selected);
 
-                if(selected.equals("ALL") && !butik.equals("ALL")){
-                    loadOne(ref, butik);}
-                else if(selected.equals("ALL") && butik.equals("ALL") ){
-                    loadAll(ref);}
-                else if(!selected.equals("ALL") && butik.equals("ALL")){
-                    loadAllFiltered(ref, selected);}
-                else if(!selected.equals("ALL") && !butik.equals("ALL")){
-                    loadFiltered(ref, butik, selected);}
+                        if (!butik.equals("ALL")) {
+                            loadOne(ref, butik, selected);
+                        } else if(butik.equals("ALL")) {
+                            loadAll(ref, selected);
+                        }
 
 
-            })
+                    })
                     .show();
         });
 
-
-        //Categories
-        /*FirebaseRecyclerOptions<MainModel> options=
-                new FirebaseRecyclerOptions.Builder<MainModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Butik").child(butik).orderByChild("category").startAt("Frukt & Grönt").endAt("Frukt & Grönt"+"\uf8ff"), MainModel.class)
-                        .build();*/
-
-        //mainAdapter = new MainAdapter(options);
-        //recyclerView.setAdapter(mainAdapter);
-
-
     }
 
-    /*@Override
-    protected void onStart() {
-        super.onStart();
-        mainAdapter.startListening();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mainAdapter.stopListening();
-    }*/
-
-
-    public void loadOne(DatabaseReference reference, String butik){
+    public void loadOne(DatabaseReference reference, String butik, String filter){
         reference.child(butik).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 productList.clear();
-                    for (DataSnapshot ds : snapshot.getChildren()) {
-                           MainModel model = ds.getValue(MainModel.class);
-                            productList.add(model);}
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    String category = ds.child("category").getValue(String.class);
+                    if (filter.equals("All")) {
+                        MainModel model = ds.getValue(MainModel.class);
+                        productList.add(model);
+                    } else if (category.equals(filter)) {
+                        MainModel model = ds.getValue(MainModel.class);
+                        productList.add(model);
+                    }
                     Collections.sort(productList, new CustomComparator());
                     adapter.notifyDataSetChanged();
+                }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -149,16 +127,22 @@ public class ReadDatabase extends AppCompatActivity {
         });
     }
 
-    public void loadAll(DatabaseReference reference){
+    public void loadAll(DatabaseReference reference, String filter){
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 productList.clear();
                 for (DataSnapshot ds1: snapshot.getChildren()) {
                     for (DataSnapshot ds : ds1.getChildren()) {
+                        String category = ds.child("category").getValue(String.class);
+                        if (filter.equals("All")) {
                             MainModel model = ds.getValue(MainModel.class);
-                            productList.add(model);}
-
+                            productList.add(model);
+                        } else if (category.equals(filter)) {
+                            MainModel model = ds.getValue(MainModel.class);
+                            productList.add(model);
+                        }
+                    }
                 }
                 Collections.sort(productList, new CustomComparator());
                 adapter.notifyDataSetChanged();
@@ -172,7 +156,7 @@ public class ReadDatabase extends AppCompatActivity {
         });
     }
 
-    public void loadFiltered(DatabaseReference reference,String butik, String filter){
+    /*public void loadFiltered(DatabaseReference reference,String butik, String filter){
         reference.child(butik).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -224,7 +208,7 @@ public class ReadDatabase extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 
     public void searchList(String filter){
         ArrayList<MainModel> filteredList = new ArrayList<>();
@@ -239,9 +223,11 @@ public class ReadDatabase extends AppCompatActivity {
 
             }
         }
-        if(!filteredList.isEmpty()) {
-            adapter.setFilteredList(filteredList, filter);
+        if(filteredList.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Hittade inga varor", Toast.LENGTH_SHORT).show();
         }
+        adapter.setFilteredList(filteredList, filter);
+
 
     }
     public class CustomComparator implements Comparator<MainModel> {

@@ -28,10 +28,18 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+    ArrayList<String> favs = new ArrayList<String>();
+    static final String STORA_COOP_VALSVIKEN = "STORA_COOP_VALSVIKEN";
+    static final String ICA_MAXI = "ICA-MAXI";
+    static final String LIDL = "LIDL";
+    static final String WILLYS = "WILLYS";
+    static final String ALL = "ALL";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
         ImageView btnLogOut = findViewById(R.id.logoutbtn);
         ImageView btnSettings = findViewById(R.id.settingbtn);
         ImageView btnSearch = findViewById(R.id.searchbtn);
+        ImageView btnFavorites = findViewById(R.id.favoritesbtn);
+
 
 
         btnMap.setOnClickListener(view -> OpenActivity(MapsActivity.class));
@@ -92,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnSettings.setOnClickListener(view -> OpenActivity(Settings.class));
+
+        btnFavorites.setOnClickListener(view -> OpenActivity(FavoritesActivity.class));
 
         btnSearch.setOnClickListener(view -> {
 
@@ -115,4 +127,32 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(intent);
     }
+
+    public void openFav(){
+
+        if(UserManagement.isUserLoggedIn()){
+            AccountSettings.AddUserSettingsUpdateCallback(this, (UserSettingsMessage settings) -> {
+                Log.i("ACCOUNT SETTINGS LOG", "Updating switches, " + settings.toString());
+                if (settings.IsWILLYSFavoured())
+                    favs.add(WILLYS);
+                if (settings.IsCOOPFavoured())
+                    favs.add(STORA_COOP_VALSVIKEN);
+                if (settings.IsLIDLFavoured())
+                    favs.add(LIDL);
+                if (settings.IsICAFavoured())
+                    favs.add(ICA_MAXI);
+
+
+            });
+
+            Intent intent = new Intent(this, ReadDatabase.class);
+
+            intent.putExtra("favs", favs);
+            startActivity(intent);
+        }else{
+
+            Intent intent = new Intent(this, MapsActivity.class);
+
+            startActivity(intent);}
+}
 }

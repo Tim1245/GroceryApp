@@ -29,7 +29,7 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
     protected void onBindViewHolder(@NonNull myViewHolder holder, int position, @NonNull MainModel model) {
         holder.title.setText(model.getTitle());
         holder.price.setText(model.getPrice());
-        holder.size.setText(model.getSize());
+        holder.highlight.setText(model.getSize());
 
         Glide.with(holder.url_Image.getContext())
                 .load(model.getUrl_Image())
@@ -48,7 +48,7 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
 
     class myViewHolder extends RecyclerView.ViewHolder{
         ImageView url_Image;
-        TextView title, price, size;
+        TextView title, price, highlight;
 
         public myViewHolder(@NonNull View itemView){
             super(itemView);
@@ -56,7 +56,7 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
             url_Image = itemView.findViewById(R.id.img1);
             title = itemView.findViewById(R.id.nametext);
             price = itemView.findViewById(R.id.price);
-            size = itemView.findViewById(R.id.weight);
+            highlight = itemView.findViewById(R.id.highlight);
         }
     }
 }

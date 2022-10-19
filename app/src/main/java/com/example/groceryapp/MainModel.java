@@ -4,13 +4,13 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
 public class MainModel {
-    private String url_Image, title, price, size, category, highlight, info, unit;
+    private String url_Image, title, price, size, category, highlight, info, unit, store;
 
     MainModel(){
 
     }
 
-    public MainModel(String url_Image, String title, String price, String size, String category, String highlight, String info, String unit) {
+    public MainModel(String url_Image, String title, String price, String size, String category, String highlight, String info, String unit, String store) {
         this.url_Image = url_Image;
         this.title = title;
         this.price = price;
@@ -19,6 +19,15 @@ public class MainModel {
         this.highlight = highlight;
         this.info = info;
         this.unit = unit;
+        this.store = store;
+    }
+
+    public String getStore() {
+        return store;
+    }
+
+    public void setStore(String store) {
+        this.store = store;
     }
 
     public String getUrl_Image() {

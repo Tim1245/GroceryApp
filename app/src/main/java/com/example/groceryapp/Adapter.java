@@ -50,8 +50,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder>{
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
         MainModel model = productList.get(position);
         holder.title.setText(model.getTitle());
+        holder.highlight.setText(model.getHighlight());
         holder.price.setText(model.getPrice());
-        holder.size.setText(model.getSize());
 
         Glide.with(holder.url_Image.getContext())
                 .load(model.getUrl_Image())
@@ -60,6 +60,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder>{
                 .into(holder.url_Image);
 
 
+        if(model.getStore().equals("WILLYS"))
+            holder.store_image.setImageResource(R.drawable.willys);
+        else if(model.getStore().equals("ICA"))
+            holder.store_image.setImageResource(R.drawable.maxi);
+        else if(model.getStore().equals("COOP"))
+            holder.store_image.setImageResource(R.drawable.coop);
+        else if(model.getStore().equals("LIDL"))
+            holder.store_image.setImageResource(R.drawable.lidl);
 
 
     }
@@ -70,16 +78,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder>{
     }
 
     static class myViewHolder extends RecyclerView.ViewHolder{
-        ImageView url_Image;
-        TextView title, price, size;
+        ImageView url_Image, store_image;
+        TextView title, price, highlight;
 
         public myViewHolder(@NonNull View itemView){
             super(itemView);
-
+            store_image = itemView.findViewById(R.id.img2);
             url_Image = itemView.findViewById(R.id.img1);
             title = itemView.findViewById(R.id.nametext);
+            highlight = itemView.findViewById(R.id.highlight);
             price = itemView.findViewById(R.id.price);
-            size = itemView.findViewById(R.id.weight);
         }
     }
 }

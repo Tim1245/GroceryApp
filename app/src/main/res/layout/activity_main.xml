@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toStartOf="@+id/filterByCategory"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:queryHint="Search" />
+        app:queryHint="@string/search" />
 
     <ImageButton
         android:id="@+id/filterByCategory"

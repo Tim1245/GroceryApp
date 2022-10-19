@@ -23,5 +23,7 @@
     <string name="stores">Affärer</string>
     <string name="favourite">Favorite</string>
     <string name="showing_all">Visar alla</string>
+    <string name="showing">Visar</string>
+
 
 </resources>

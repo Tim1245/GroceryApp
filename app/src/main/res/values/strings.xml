@@ -23,5 +23,7 @@
     <string name="stores">Stores</string>
     <string name="favourite">Favourite</string>
     <string name="showing_all">Showing All</string>
+    <string name="showing">Showing</string>
+
 
 </resources>
