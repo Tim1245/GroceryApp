@@ -23,32 +23,38 @@ public class LoginAndEmailFailure extends AppCompatActivity {
         if (email.isEmpty() && password.isEmpty()) {
             password_view.requestFocus();
             email_view.requestFocus();
-            password_view.setError("No password!");
-            email_view.setError("No email!");
+            password_view.setError("Please enter a password");
+            email_view.setError("Please enter an email");
         }
         else if (email.isEmpty()) {
             email_view.requestFocus();
-            email_view.setError("No email!");
+            email_view.setError("Please enter an email");
         }
         else if (password.isEmpty()) {
             password_view.requestFocus();
-            password_view.setError("No password!");
+            password_view.setError("Please enter a password");
         }
     }
 
     public void errorMessageEmail(TextView email_view) {
         email_view.requestFocus();
-        email_view.setError("Wrong Email!");
+        email_view.setError("Wrong Email");
     }
 
     public void errorMessagePassword(TextView password_view) {
         password_view.requestFocus();
-        password_view.setError("Wrong Password!");
+        password_view.setError("Wrong Password");
     }
 
     public void errorMessageEmailExist(TextView email_view) {
         email_view.requestFocus();
         email_view.setError("Email already exists");
+    }
+
+
+    public void errorPassWordShort(TextView password_view) {
+        password_view.requestFocus();
+        password_view.setError("Password too short");
     }
 
 }

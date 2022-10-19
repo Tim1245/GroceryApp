@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +16,7 @@ import com.google.firebase.auth.AuthResult;
 
 public class LoginActivity extends AppCompatActivity {
     LoginAndEmailFailure loginAndEmailFailure = new LoginAndEmailFailure();
+    public static int logOutPressed;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("Login UI test", "User opened the login page");
@@ -41,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                 loginAndEmailFailure.checkPasswordAndEmail(email, password, email_view, password_view);
                 return;
             }
-            UserManagement.createUserDefault(email, password, email_view, (Task<AuthResult> task) -> {
+            UserManagement.createUserDefault(email, password, email_view, password_view, (Task<AuthResult> task) -> {
                 if (task.isSuccessful()) {
                     Log.i("Login UI test", "User has been created!");
                     finish();
@@ -64,7 +66,9 @@ public class LoginActivity extends AppCompatActivity {
             }
             UserManagement.loginUser(email, password, email_view, password_view, (Task<AuthResult> task) -> {
                 if (task.isSuccessful()) {
+                    logOutPressed = 1;
                     Log.i("Login UI test", "User has been logged in!");
+                    Toast.makeText(this, "Logged in", Toast.LENGTH_SHORT).show();
                     finish();
                 }
                 else {
