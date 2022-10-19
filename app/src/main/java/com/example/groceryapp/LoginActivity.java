@@ -46,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
             UserManagement.createUserDefault(email, password, email_view, password_view, (Task<AuthResult> task) -> {
                 if (task.isSuccessful()) {
                     Log.i("Login UI test", "User has been created!");
+                    logOutPressed = 1;
+                    Toast.makeText(this, "User has been created", Toast.LENGTH_SHORT).show();
                     finish();
                 }
                 else {
