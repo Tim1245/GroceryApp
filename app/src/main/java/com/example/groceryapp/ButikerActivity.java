@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,6 +29,9 @@ public class ButikerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_stores);
+
+        ImageView backbtn = findViewById(R.id.left);
+        TextView btnback = findViewById(R.id.textView13);
         ImageView btnWILLYS = findViewById(R.id.willysbtn);
         switchWILLYS = findViewById(R.id.switch_willys);
         ImageView btnCOOP = findViewById(R.id.coopbtn);
@@ -48,6 +52,20 @@ public class ButikerActivity extends AppCompatActivity {
         btnLIDL.setOnClickListener((View view) -> OpenStoreActivity(LIDL));
         btnWILLYS.setOnClickListener((View view) -> OpenStoreActivity(WILLYS));
         btnALL.setOnClickListener((View view) -> OpenStoreActivity(ALL));
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenActivity(MainActivity.class);
+            }
+        });
+
+        btnback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenActivity(MainActivity.class);
+            }
+        });
 
     }
 
@@ -87,6 +105,10 @@ public class ButikerActivity extends AppCompatActivity {
         AccountSettings.RemoveUserSettingsUpdateCallback(this);
         Intent intent = new Intent(this, ReadDatabase.class);
         intent.putExtra("Butik", butik);
+        startActivity(intent);
+    }
+    public void OpenActivity(Class activity){
+        Intent intent = new Intent(this, activity);
         startActivity(intent);
     }
 }

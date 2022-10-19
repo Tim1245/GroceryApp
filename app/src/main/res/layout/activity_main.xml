@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="Showing All"
+        android:text="@string/showing_all"
         android:textStyle="bold"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="@+id/searchView"
@@ -64,25 +64,5 @@
 
         />
 
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="200dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="4dp"
-        android:text="Cart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/SearchBtn"
-        android:layout_width="200dp"
-        android:layout_height="45dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
-        android:text="Search"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

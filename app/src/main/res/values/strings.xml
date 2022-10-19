@@ -1,4 +1,27 @@
 <resources>
     <string name="app_name">GroceryApp</string>
 
-    </resources>
+    <string name="language_settings">Language settings</string>
+    <string name="products">Products</string>
+    <string name="map">Map</string>
+    <string name="home">Home</string>
+    <string name="settingstitle">Settings</string>
+    <string name="search">Search</string>
+    <string name="favorites">Favorites</string>
+    <string name="cart">Cart</string>
+    <string name="log_out">Log out</string>
+    <string name="eng">English</string>
+    <string name="swe">Swedish</string>
+    <string name="languagesettings">Language Settings</string>
+    <string name="question">Question?</string>
+    <string name="answer1">Answer</string>
+    <string name="question2">Question?</string>
+    <string name="answer2">Answer</string>
+    <string name="question3">Question?</string>
+    <string name="answer3">Answer</string>
+    <string name="all">All</string>
+    <string name="stores">Stores</string>
+    <string name="favourite">Favourite</string>
+    <string name="showing_all">Showing All</string>
+
+</resources>

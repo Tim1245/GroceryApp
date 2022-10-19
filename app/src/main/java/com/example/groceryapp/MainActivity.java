@@ -31,13 +31,14 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-
+    LocaleHelper localehelper = new LocaleHelper();
     // Get the database instance and store into object
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // If we want to force immediate login
         //UserManagement.RequireUserLogin(this);
+        localehelper.onMake(this);
         setContentView(R.layout.newhomepage);
         ImageView btnRead = findViewById(R.id.productbtn);
         ImageView btnMap = findViewById(R.id.mapbtn);

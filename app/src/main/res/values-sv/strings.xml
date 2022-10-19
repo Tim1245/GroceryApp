@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GroceryApp</string>
+    <string name="language_settings">Språk Inställningar</string>
+    <string name="products">Produkter</string>
+    <string name="map">Karta</string>
+    <string name="home">Hem</string>
+    <string name="settingstitle">Inställningar</string>
+    <string name="search">Sök</string>
+    <string name="favorites">Favoriter</string>
+    <string name="cart">Korg</string>
+    <string name="log_out">Logga ut</string>
+    <string name="eng">Engelska</string>
+    <string name="swe">Svenska</string>
+    <string name="languagesettings">Språk Inställningar</string>
+    <string name="question">Question?</string>
+    <string name="answer1">Answer</string>
+    <string name="question2">Question?</string>
+    <string name="answer2">Answer</string>
+    <string name="question3">Question?</string>
+    <string name="answer3">Answer</string>
+    <string name="all">Alla</string>
+    <string name="stores">Affärer</string>
+    <string name="favourite">Favorite</string>
+    <string name="showing_all">Visar alla</string>
+
+</resources>

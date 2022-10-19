@@ -12,14 +12,33 @@
         android:adjustViewBounds="true"
         android:contentDescription="yes"
         app:srcCompat="@drawable/backgroundrect" />
-
+    <ImageView
+        android:id="@+id/left"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="yes"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/leftarrow" />
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_anchor="@id/left"
+        android:layout_marginLeft="35dp"
+        app:layout_anchorGravity="center" />
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="22dp"
-        android:text="Stores"
+        android:layout_marginTop="45dp"
+        android:text="@string/stores"
         android:textColor="@color/white"
         android:textSize="35dp"
         android:textStyle="bold"
@@ -43,7 +62,7 @@
         android:layout_marginTop="265dp"
         android:background="#FFFFFF"
         android:buttonTint="#000000"
-        android:text="Favourite"
+        android:text="@string/favourite"
         android:textColor="#000000"
         android:thumbTint="#F3000000"
         android:trackTint="#E6000000" />
@@ -66,7 +85,7 @@
         android:layout_marginTop="265dp"
         android:background="#FFFFFF"
         android:buttonTint="#000000"
-        android:text="Favourite"
+        android:text="@string/favourite"
         android:textColor="#000000"
         android:thumbTint="#F3000000"
         android:trackTint="#E6000000" />
@@ -89,7 +108,7 @@
         android:layout_marginTop="470dp"
         android:background="#FFFFFF"
         android:buttonTint="#000000"
-        android:text="Favourite"
+        android:text="@string/favourite"
         android:textColor="#000000"
         android:thumbTint="#F3000000"
         android:trackTint="#E6000000" />
@@ -112,7 +131,7 @@
         android:layout_marginTop="470dp"
         android:background="#FFFFFF"
         android:buttonTint="#000000"
-        android:text="Favourite"
+        android:text="@string/favourite"
         android:textColor="#000000"
         android:thumbTint="#F3000000"
         android:trackTint="#E6000000" />
@@ -131,7 +150,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="All"
+        android:text="@string/all"
         android:textSize="22dp"
         android:textColor="@color/black"
         app:layout_anchor="@+id/allbtn"
