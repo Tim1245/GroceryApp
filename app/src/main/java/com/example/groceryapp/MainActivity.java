@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -50,7 +51,12 @@ public class MainActivity extends AppCompatActivity {
 
         btnRead.setOnClickListener(view -> OpenActivity(ButikerActivity.class));
 
-        btnLogOut.setOnClickListener((View view) -> UserManagement.signOut());
+        btnLogOut.setOnClickListener((View view) ->  {
+            UserManagement.signOut();
+            if (LoginActivity.logOutPressed == 1)
+                Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
+            LoginActivity.logOutPressed = 0;
+        });
 
         btnSettings.setOnClickListener(view -> OpenActivity(Settings.class));
 
