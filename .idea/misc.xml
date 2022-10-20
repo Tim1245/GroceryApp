@@ -20,7 +20,7 @@
         <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/activity_maps.xml" value="0.2391304347826087" />
         <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/activity_show_products.xml" value="0.13949275362318841" />
         <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/activity_stores.xml" value="0.1" />
-        <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/faq.xml" value="0.2" />
+        <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/faq.xml" value="0.18981481481481483" />
         <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/homepage.xml" value="0.264" />
         <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/homepagenew.xml" value="0.264" />
         <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/languagesettings.xml" value="0.24547101449275363" />
@@ -32,12 +32,6 @@
         <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/product_list_item.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/products_row.xml" value="0.13949275362318841" />
         <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/settings.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/faq.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/homepagenew.xml" value="0.25104166666666666" />
-        <entry key="app/src/main/res/layout/languagesettings.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/newhomepage.xml" value="0.25104166666666666" />
-        <entry key="app/src/main/res/layout/settings.xml" value="0.25104166666666666" />
-        <entry key="app/src/main/res/layout/testfaq.xml" value="0.25" />
       </map>
     </option>
   </component>
