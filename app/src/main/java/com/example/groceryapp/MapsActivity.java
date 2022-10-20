@@ -46,6 +46,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Button btn = findViewById(R.id.button1);
+        Button myLocation = findViewById(R.id.button2);
+
         btn.setOnClickListener(view -> closestStore());
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this.getApplicationContext());
@@ -53,6 +55,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        myLocation.setOnClickListener(view -> getCurrentLocation());
     }
 
 
@@ -214,7 +218,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
             LatLng latLng1 = new LatLng(location.getLatitude(), location.getLongitude());
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng1, 15));
-            Toast.makeText(getApplicationContext(), "Closest Store is: "+ location.getProvider(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Closest Store is: "+ location.getProvider() +"\nDistance: " + (int) distance + " m", Toast.LENGTH_SHORT).show();
         }else{
             getCurrentLocation();
         }
