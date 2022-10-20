@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/linus/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/activity_butiker.xml" value="0.178125" />
         <entry key="..\:/Users/madia/AndroidStudioProjects/GroceryApp/app/src/main/res/drawable/rectangle2.xml" value="0.1" />
         <entry key="..\:/Users/madia/AndroidStudioProjects/GroceryApp/app/src/main/res/drawable/shape1.xml" value="0.2545" />
         <entry key="..\:/Users/madia/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/activity_main.xml" value="0.1368421052631579" />
@@ -24,14 +23,21 @@
         <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/faq.xml" value="0.2" />
         <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/homepage.xml" value="0.264" />
         <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/homepagenew.xml" value="0.264" />
+        <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/languagesettings.xml" value="0.24547101449275363" />
         <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/loginpage.xml" value="0.2391304347826087" />
         <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/main_home.xml" value="0.264" />
         <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/main_item.xml" value="0.21212121212121213" />
         <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/new_products_row.xml" value="0.1" />
-        <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/newhomepage.xml" value="0.1" />
+        <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/newhomepage.xml" value="0.16" />
         <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/product_list_item.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/products_row.xml" value="0.13949275362318841" />
-        <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/settings.xml" value="0.15806159420289856" />
+        <entry key="..\:/Users/tim-a/AndroidStudioProjects/GroceryApp/app/src/main/res/layout/settings.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/faq.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/homepagenew.xml" value="0.25104166666666666" />
+        <entry key="app/src/main/res/layout/languagesettings.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/newhomepage.xml" value="0.25104166666666666" />
+        <entry key="app/src/main/res/layout/settings.xml" value="0.25104166666666666" />
+        <entry key="app/src/main/res/layout/testfaq.xml" value="0.25" />
       </map>
     </option>
   </component>
