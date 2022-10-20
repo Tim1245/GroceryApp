@@ -13,17 +13,24 @@
     <string name="eng">English</string>
     <string name="swe">Swedish</string>
     <string name="languagesettings">Language Settings</string>
-    <string name="question">Question?</string>
-    <string name="answer1">Answer</string>
-    <string name="question2">Question?</string>
-    <string name="answer2">Answer</string>
-    <string name="question3">Question?</string>
-    <string name="answer3">Answer</string>
     <string name="all">All</string>
     <string name="stores">Stores</string>
     <string name="favourite">Favourite</string>
     <string name="showing_all">Showing All</string>
     <string name="showing">Showing</string>
+    <string name="question1">How do I contact the support?</string>
+    <string name="answer1">You can contact us through this email: Groceryapp@support.com</string>
+    <string name="question2">How do I delete my account?</string>
+    <string name="answer2">Contact the support.</string>
+    <string name="question3">How is my data handled?</string>
+    <string name="answer3">It is encrypted according to GDPR guidelines</string>
+    <string name="question4">How do I change language?</string>
+    <string name="answer4">In settings there is a button called "Language settings" press that one and choose your preferred language.</string>
+    <string name="question5">question5</string>
+    <string name="answer5">answer5</string>
+    <string name="question6">question6</string>
+    <string name="answer6">answer6</string>
+    <string name="log_in">Log in</string>
 
 
 </resources>

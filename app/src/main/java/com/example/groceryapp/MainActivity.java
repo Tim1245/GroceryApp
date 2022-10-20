@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView btnRead = findViewById(R.id.productbtn);
         ImageView btnMap = findViewById(R.id.mapbtn);
         ImageView btnLogOut = findViewById(R.id.logoutbtn);
+        ImageView btnLogIn = findViewById(R.id.loginbtn);
         ImageView btnSettings = findViewById(R.id.settingbtn);
         ImageView btnSearch = findViewById(R.id.searchbtn);
         ImageView btnFavorites = findViewById(R.id.favoritesbtn);
@@ -99,6 +100,14 @@ public class MainActivity extends AppCompatActivity {
             if (LoginActivity.logOutPressed == 1)
                 Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
             LoginActivity.logOutPressed = 0;
+        });
+
+        btnLogIn.setOnClickListener((View view) ->  {
+            if (UserManagement.isUserLoggedIn()) {
+            }
+            else {
+                startActivity(new Intent(this, LoginActivity.class));
+            }
         });
 
         btnSettings.setOnClickListener(view -> OpenActivity(Settings.class));

@@ -13,17 +13,24 @@
     <string name="eng">Engelska</string>
     <string name="swe">Svenska</string>
     <string name="languagesettings">Språk Inställningar</string>
-    <string name="question">Question?</string>
-    <string name="answer1">Answer</string>
-    <string name="question2">Question?</string>
-    <string name="answer2">Answer</string>
-    <string name="question3">Question?</string>
-    <string name="answer3">Answer</string>
     <string name="all">Alla</string>
     <string name="stores">Affärer</string>
     <string name="favourite">Favorite</string>
     <string name="showing_all">Visar alla</string>
     <string name="showing">Visar</string>
+    <string name="question1">Hur kontaktar jag supporten?</string>
+    <string name="answer1">Du kan kontakta oss genom denna email: Groceryapp@support.com</string>
+    <string name="question2">Hur raderar jag mitt konto?</string>
+    <string name="answer2">Kontakta supporten.</string>
+    <string name="question3">Hur hanteras min data?</string>
+    <string name="answer3">Personlig data är krypterad enligt GDPR.</string>
+    <string name="question4">Hur ändrar jag språk?</string>
+    <string name="answer4">I inställningar finns "Språk inställningar" klicka där och välj språk.</string>
+    <string name="question5">question5</string>
+    <string name="answer5">answer5</string>
+    <string name="question6">question6</string>
+    <string name="answer6">answer6</string>
+    <string name="log_in">Logga in</string>
 
 
 </resources>
