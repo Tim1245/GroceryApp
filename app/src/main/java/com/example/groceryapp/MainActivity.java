@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
+        stopService(new Intent(this, NotificationHandler.class));
         LocaleHelper.onMake(this);
         setContentView(R.layout.newhomepage);
         ImageView btnRead = findViewById(R.id.productbtn);
@@ -111,14 +112,11 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("Butik", "ALL");
             startActivity(intent);
         });
-
-        stopService(new Intent(this, NotificationHandler.class));
-
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onPause() {
+        super.onPause();
         startService(new Intent(this, NotificationHandler.class));
     }
 
