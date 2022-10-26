@@ -33,48 +33,11 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    ArrayList<String> favs = new ArrayList<String>();
     static final String STORA_COOP_VALSVIKEN = "STORA_COOP_VALSVIKEN";
     static final String ICA_MAXI = "ICA-MAXI";
     static final String LIDL = "LIDL";
     static final String WILLYS = "WILLYS";
     static final String ALL = "ALL";
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        /*localehelper.onMake(this);
-        setContentView(R.layout.newhomepage);
-        ImageView btnRead = findViewById(R.id.productbtn);
-        ImageView btnMap = findViewById(R.id.mapbtn);
-        ImageView btnLogOut = findViewById(R.id.logoutbtn);
-        ImageView btnSettings = findViewById(R.id.settingbtn);
-        ImageView btnSearch = findViewById(R.id.searchbtn);
-
-
-        btnMap.setOnClickListener(view -> OpenActivity(MapsActivity.class));
-
-        btnRead.setOnClickListener(view -> OpenActivity(ButikerActivity.class));
-
-        btnLogOut.setOnClickListener((View view) ->  {
-            UserManagement.signOut();
-            if (LoginActivity.logOutPressed == 1)
-                Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
-            LoginActivity.logOutPressed = 0;
-        });
-
-        btnSettings.setOnClickListener(view -> OpenActivity(Settings.class));
-
-        btnSearch.setOnClickListener(view -> {
-
-            Intent intent = new Intent(MainActivity.this, ReadDatabase.class);
-            intent.putExtra("Butik", "ALL");
-            startActivity(intent);
-        });
-
-        startService(new Intent(this, NotificationHandler.class));
-*/
-    }
 
     @Override
     public void onResume() {
@@ -136,10 +99,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openFav(){
-
         if(UserManagement.isUserLoggedIn()){
             AccountSettings.AddUserSettingsUpdateCallback(this, (UserSettingsMessage settings) -> {
                 Log.i("ACCOUNT SETTINGS LOG", "Updating switches, " + settings.toString());
+                ArrayList<String> favs = new ArrayList<String>();
                 if (settings.IsWILLYSFavoured())
                     favs.add(WILLYS);
                 if (settings.IsCOOPFavoured())
@@ -150,16 +113,16 @@ public class MainActivity extends AppCompatActivity {
                     favs.add(ICA_MAXI);
 
 
+                Intent intent = new Intent(this, ReadDatabase.class);
+
+                Log.e("ACCOUNT SETTINGS LOG", "Favourites: " + favs.toString());
+                intent.putExtra("favs", favs);
+                startActivity(intent);
             });
-
-            Intent intent = new Intent(this, ReadDatabase.class);
-
-            intent.putExtra("favs", favs);
-            startActivity(intent);
-        }else{
-
+        }
+        else{
             Intent intent = new Intent(this, MapsActivity.class);
-
-            startActivity(intent);}
-}
+            startActivity(intent);
+        }
+    }
 }
