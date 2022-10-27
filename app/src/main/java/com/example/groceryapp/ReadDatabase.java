@@ -31,7 +31,7 @@ public class ReadDatabase extends AppCompatActivity {
     private TextView categories;
 
     public static final String[] Categories={
-            "Allt",
+            "All",
             "Vegetariskt",
             "Vegan",
             "Frukt & grönsaker",
