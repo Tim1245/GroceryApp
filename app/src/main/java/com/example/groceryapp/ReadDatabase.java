@@ -29,8 +29,9 @@ public class ReadDatabase extends AppCompatActivity {
     private ArrayList<MainModel> productList;
     private Adapter adapter;
     private TextView categories;
+
     public static final String[] Categories={
-            "All",
+            "Allt",
             "Vegetariskt",
             "Vegan",
             "Frukt & grönsaker",

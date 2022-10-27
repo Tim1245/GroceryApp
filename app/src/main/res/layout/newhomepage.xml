@@ -83,24 +83,7 @@
         android:adjustViewBounds="true"
         app:srcCompat="@drawable/circle"
         android:contentDescription="yes" />
-    <ImageView
-        android:layout_marginLeft="260dp"
-        android:layout_marginTop="20dp"
-        android:adjustViewBounds="true"
-        android:id="@+id/notifbtn"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        app:srcCompat="@drawable/circle"
-        android:contentDescription="yes" />
-    <ImageView
-        android:layout_marginLeft="265dp"
-        android:layout_marginTop="22dp"
-        android:adjustViewBounds="true"
-        android:id="@+id/imageView10"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/bell"
-        android:contentDescription="yes" />
+
     <ImageView
         android:id="@+id/imageView11"
         android:layout_width="50dp"
